@@ -23,7 +23,9 @@ public class EnemyHealth : MonoBehaviour
     
     [Header("----------Stun duration----------")]
     public float staggerDuration = 0.5f;  // ระยะเวลาที่ศัตรูหยุดชะงัก
-   // private bool isStaggered = false;
+    //private bool isStaggered = false;
+    private float lastTimeStagger = 0;
+    public float cooldownStagger = 4;
    private bool isHurt;
 
    void Start()
@@ -54,10 +56,7 @@ public class EnemyHealth : MonoBehaviour
             damageDisplay.DisplayDamage(damage);
             if (currentHealth > 0)
             {
-                
-               // Debug.Log("Hit Enemylana");
-                Stagger();
-                
+                    Stagger();
             }
             if (currentHealth <= 0)
             {
@@ -81,19 +80,22 @@ public class EnemyHealth : MonoBehaviour
     }
     void Stagger()
     {
-        if (animator != null)
+       
+        if (animator != null && Time.time > lastTimeStagger  )
         {
+            lastTimeStagger = Time.time + cooldownStagger;
             animator.SetTrigger("Hit");
         }
 
-        //isStaggered = true;
+       // isStaggered = true;
         // หยุดการเคลื่อนไหวของศัตรูชั่วคราว
         GetComponent<EnemyAttack>().enabled = false;  // ปิดการเคลื่อนไหว
         Invoke("RecoverFromStagger", staggerDuration);  // กำหนดเวลาหยุดชะงัก
+        
     }
     void RecoverFromStagger()
     {
-       // isStaggered = false;
+     //  isStaggered = false;
         GetComponent<EnemyAttack>().enabled = true;  // เปิดการเคลื่อนไหวกลับมา
     }
     

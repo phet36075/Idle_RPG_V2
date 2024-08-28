@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void ToggleAI()
+    public void ToggleAI()
     {
         bool isAIEnabled = aiController.enabled;
         aiController.enabled = !isAIEnabled;

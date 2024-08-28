@@ -25,7 +25,7 @@ public class EnemyClickIndicator : MonoBehaviour
             {
                 
                 // ตรวจสอบว่าเราคลิกโดนศัตรูหรือไม่
-                if (hit.collider.CompareTag("Enemy")) // สมมติว่า Tag ของศัตรูคือ "Enemy"
+                if (hit.collider.CompareTag("Enemy") ||  hit.collider.CompareTag("Boss")) // สมมติว่า Tag ของศัตรูคือ "Enemy" 
                 {
                     Transform enemyTransform = hit.transform;
                     playerAIController.SetTarget(enemyTransform);
@@ -43,6 +43,7 @@ public class EnemyClickIndicator : MonoBehaviour
                     currentIndicator.transform.SetParent(hit.transform);
                    // currentIndicator.transform.LookAt(currentIndicator.transform.position + cam.forward);
                 }
+                
                 else
                 {
                     Destroy(currentIndicator);

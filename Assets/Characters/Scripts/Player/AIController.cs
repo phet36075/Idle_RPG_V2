@@ -14,15 +14,24 @@ public class AIController : MonoBehaviour
     public float rotationSpeed = 5f;
     public GameObject indicatorPrefab; // Prefab ของ Indicator
     private GameObject currentIndicator;
-
+    
+    private Transform nextLevelTarget; 
+    
+    private bool moveToNextLevel = false;
+    public StageManager _StageManager;
+    public int stage = 0;
+    public EnvironmentManager _EnvironmentManager;
+    public EnemySpawner _EnemySpawner;
+    public bool isLastStage;
+    
     private void OnDisable()
     {
         if (currentIndicator != null)
         {
             Destroy(currentIndicator);
         }
-        
     }
+    
 
     void Start()
     {
@@ -73,13 +82,17 @@ public class AIController : MonoBehaviour
             targetIndicator.HideIndicator();*/
             Destroy(currentIndicator);
             
+            
         }
     }
 
 
     void Update()
     {
-        
+        if (moveToNextLevel)
+        {
+            MoveToNextLevel();
+        }
         if (currentIndicator != null)
         {
             
@@ -99,19 +112,21 @@ public class AIController : MonoBehaviour
        if (target != null)
        {
            EnemyHealth targetEnemy = target.GetComponent<EnemyHealth>();
-
            if (targetEnemy != null && targetEnemy.isDead)
            {
                // หากศัตรูตายแล้ว หาศัตรูใหม่
-               FindNearestEnemy();
+                   FindNearestEnemy();
            }
            else
            {
                // ทำงานตามปกติ
-               agent.SetDestination(target.position);
-                
+               if (moveToNextLevel == false)
+               {
+                   agent.SetDestination(target.position);
+               }
+              
+               
                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
                if (distanceToTarget <= attackRange)
                {
                    agent.isStopped = true;
@@ -120,7 +135,6 @@ public class AIController : MonoBehaviour
                    {
                        PlayerAttack playerAttack = this.GetComponent<PlayerAttack>();
                        playerAttack.Attack();
-                      
                        nextAttackTime = Time.time + attackCooldown;
                    }
                }
@@ -135,12 +149,56 @@ public class AIController : MonoBehaviour
        else
        {
            // หาศัตรูใหม่เมื่อไม่มีเป้าหมาย
-           FindNearestEnemy();
-//           TargetIndicator targetIndicator = target.GetComponent<TargetIndicator>();
-          // targetIndicator.HideIndicator();
-          Destroy(currentIndicator);
+           if (moveToNextLevel == false)
+           {
+               FindNearestEnemy();
+               Destroy(currentIndicator);
+           }
+           
+         //  FindNearestEnemy();
+         
           
        }
+    }
+    
+     public void MoveToNextLevel()
+     {
+        // _EnemySpawner.ClearEnemies();
+         moveToNextLevel = true;
+         Destroy(currentIndicator);
+         nextLevelTarget = GameObject.FindGameObjectWithTag("NextLevelPosition").transform;
+        agent.SetDestination(nextLevelTarget.position);
+        
+        _EnemySpawner.enemiesDefeated = 0;
+        Debug.Log("กำลังเดินไปที่จุด!");
+        // ตรวจสอบว่าผู้เล่นไปถึงจุดหมายปลายทางหรือไม่
+        if (Vector3.Distance(transform.position, nextLevelTarget.position) < 0.5f)
+        {
+            if (_StageManager.stage != _EnvironmentManager.AllStage)
+            {
+                _EnemySpawner.enemiesDefeated = 0;
+                _StageManager.stage += 1;
+                Debug.Log("ถึงด่านใหม่แล้ว! ด่านที่ :" + stage);
+                _EnvironmentManager.LoadEnvironment(_StageManager.stage);
+                moveToNextLevel = false;
+            }
+            else
+            {
+                isLastStage = true;
+                Debug.Log("ด่านสุดท้ายแล้ว ด่านที่ :" + stage);
+                moveToNextLevel = false;
+                FindNearestEnemy();
+                agent.SetDestination(target.position);
+            }
+            
+           
+         //  _StageManager.GoToNextLevel();
+           //moveToNextLevel = false;
+           
+           
+            // ใส่ Logic การโหลดด่านใหม่ที่นี่ เช่น
+            // SceneManager.LoadScene("NextLevel");
+        }
     }
     public void SetTarget(Transform newTarget)
     {

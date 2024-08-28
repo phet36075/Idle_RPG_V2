@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     public float playerHealth;
-    public float maxHealth = 50;
+    public float maxHealth = 1000;
     private Animator animator;
-
+   // public TextMeshProUGUI _txtPlayerHealth;
     
     /*void OnTriggerEnter(Collider other)
     {
@@ -44,6 +45,6 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       // _txtPlayerHealth.text = playerHealth.ToString();
     }
 }

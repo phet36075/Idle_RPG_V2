@@ -23,7 +23,7 @@ public class EnemyRoaming : MonoBehaviour
 
     void RoamToNewPosition()
     {
-        Debug.Log("Roaming");
+        //Debug.Log("Roaming");
         // คำนวณตำแหน่งใหม่แบบสุ่มภายในรัศมี
         Vector3 randomDirection = Random.insideUnitSphere * roamRadius;
         randomDirection += startingPosition;
