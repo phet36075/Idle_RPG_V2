@@ -550,6 +550,7 @@ GameObject:
   - component: {fileID: 1241214694632399121}
   - component: {fileID: 6712980559664603852}
   - component: {fileID: 6232161165099676152}
+  - component: {fileID: 8643827258509186190}
   m_Layer: 7
   m_Name: Rabbit
   m_TagString: Enemy
@@ -686,7 +687,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 2
   attackCooldown: 2
-  attackDamage: 10
   enemySwordCollider: {fileID: 7884874271953235674}
   animator: {fileID: 6072076048926620861}
   chaseRange: 4
@@ -742,6 +742,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roamRadius: 4
   roamDelay: 3
+--- !u!114 &8643827258509186190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 882309988849078929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 694e526f8ef89de4593191eaa8b9c78c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 20
+  damageVariation: 0.2
 --- !u!1 &907806556508145850
 GameObject:
   m_ObjectHideFlags: 0
@@ -3654,7 +3668,6 @@ GameObject:
   - component: {fileID: 3923835627931212820}
   - component: {fileID: 8243100132163266088}
   - component: {fileID: 7884874271953235674}
-  - component: {fileID: 441731566552587790}
   m_Layer: 7
   m_Name: Hitbox
   m_TagString: EnemyWeapon
@@ -3750,19 +3763,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &441731566552587790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8719916544111309052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 694e526f8ef89de4593191eaa8b9c78c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 20
 --- !u!1 &8844940450808012973
 GameObject:
   m_ObjectHideFlags: 0

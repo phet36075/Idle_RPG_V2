@@ -12,7 +12,6 @@ public class EnemyClickIndicator : MonoBehaviour
     {
         if (currentIndicator != null)
         {
-          
             currentIndicator.transform.LookAt(currentIndicator.transform.position + cam.forward);
         }
        

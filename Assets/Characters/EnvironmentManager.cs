@@ -31,16 +31,7 @@ public class EnvironmentManager : MonoBehaviour
         
         currentEnvironment = Instantiate(environmentPrefabs[index], environmentContainer.position, Quaternion.identity);
         currentEnvironment.transform.parent = environmentContainer;
-        if (index == 4)
-        {
-            _EnemySpawner.SpawnBoss();
-            GameObject boss = GameObject.FindWithTag("Boss");
-            if (boss != null)
-            {
-                _AIController.SetTarget(boss.transform);
-            }
-        }
-        navMeshSurface.BuildNavMesh(); // สร้าง NavMesh ใหม่หลังจากเปลี่ยนพื้น
+       
     }
 
     private void Update()

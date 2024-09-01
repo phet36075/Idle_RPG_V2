@@ -1,8 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tiny;
 using UnityEngine;
-
+using UnityEngine.VFX;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
@@ -15,6 +16,16 @@ public class PlayerAttack : MonoBehaviour
     private float lastAttackTime = 0f;
     public float comboCooldown = 1f;
     public bool isAttacking = false;
+
+    private Transform vfxPos;
+    
+    public GameObject attackVFX;
+
+    public Trail _Trail;
+    //public TemporaryDetach temporaryDetach;
+   // public Transform vfxAttachPoint;
+    
+    
     
     
     
@@ -22,6 +33,10 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         weaponCollider.enabled = false;
+       /* if (attackVFX != null)
+        {
+            attackVFX.Stop();
+        }*/
     }
 // Update is called once per frame
     void Update()
@@ -40,11 +55,14 @@ public class PlayerAttack : MonoBehaviour
     }
     public void Attack()
     {
+       
         //isAttacking = true;
         lastAttackTime = Time.time;
         isAttacking = true;
         comboStep++;
-       
+
+        
+            
         if (comboStep == 1)
         {
             animator.SetTrigger("Attack1");
@@ -97,6 +115,40 @@ public class PlayerAttack : MonoBehaviour
     }
     
     
+    public void PerformAttack()
+    {
+        attackVFX.gameObject.SetActive(true);
+        
+      //  GetComponent<Trail>().enabled = true;
+        _Trail.enabled = true;
+        float effectDuration = 0.2f;
+        Invoke("StopEffect", effectDuration);
+        // Play the visual effect
+       /* if (attackVFX != null)
+        {
+                attackVFX.Play();
+                float effectDuration = 0.3f; // ปรับตามระยะเวลาของ VFX ของคุณ
+                Invoke("StopEffect", effectDuration);
+            
+        }*/
+    }
+
+   
+    
+    private void StopEffect()
+    {
+        
+        attackVFX.gameObject.SetActive(false);
+       // GetComponent<Trail>().enabled = false;
+       _Trail.enabled = false;
+       
+       /* if (attackVFX != null)
+        {
+            attackVFX.Stop();
+           
+        }*/
+           
+    }
     
     public void EndAttack()
     {
@@ -118,6 +170,9 @@ public class PlayerAttack : MonoBehaviour
         weaponCollider.enabled = false;
     }
 
+    
+    
+    
     
 
    /* private void OnTriggerEnter(Collider other)

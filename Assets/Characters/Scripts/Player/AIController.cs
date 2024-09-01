@@ -89,15 +89,10 @@ public class AIController : MonoBehaviour
 
     void Update()
     {
-        if (moveToNextLevel)
-        {
-            MoveToNextLevel();
-        }
+        
         if (currentIndicator != null)
         {
-            
             currentIndicator.transform.position = new Vector3(target.transform.position.x,currentIndicator.transform.position.y,target.transform.position.z);
-            
         }
        /* if (target == null || Vector3.Distance(transform.position, target.position) > attackRange)
         {
@@ -161,7 +156,7 @@ public class AIController : MonoBehaviour
        }
     }
     
-     public void MoveToNextLevel()
+    /* public void MoveToNextLevel()
      {
         // _EnemySpawner.ClearEnemies();
          moveToNextLevel = true;
@@ -199,7 +194,10 @@ public class AIController : MonoBehaviour
             // ใส่ Logic การโหลดด่านใหม่ที่นี่ เช่น
             // SceneManager.LoadScene("NextLevel");
         }
-    }
+    }*/
+    
+    
+    
     public void SetTarget(Transform newTarget)
     {
         target = newTarget;
@@ -215,7 +213,7 @@ public class AIController : MonoBehaviour
     
     void RotateTowardsTarget()
     {
-        Vector3 direction = (target.position - transform.position).normalized;
+       Vector3 direction = (target.position - transform.position).normalized;
         //Debug.Log("Direction: " + direction);  // ตรวจสอบทิศทางการหมุน
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         //Debug.Log("Target Rotation: " + lookRotation.eulerAngles);  // ตรวจสอบการหมุนที่ควรจะเป็น

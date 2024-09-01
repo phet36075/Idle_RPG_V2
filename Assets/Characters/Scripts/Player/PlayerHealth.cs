@@ -8,22 +8,21 @@ public class PlayerHealth : MonoBehaviour
     public float playerHealth;
     public float maxHealth = 1000;
     private Animator animator;
-   // public TextMeshProUGUI _txtPlayerHealth;
-    
-    /*void OnTriggerEnter(Collider other)
+   
+
+    public CharacterHitEffect hitEffect;
+    void Start()
     {
-        // ตรวจสอบว่าคุณชนกับดาบหรือไม่
-        if (other.CompareTag("EnemyWeapon"))
-            
-        {
-            EnemyAttack enemyAttack = this.GetComponent<EnemyAttack>();
-            TakeDamage(10);  // ผู้เล่นจะเสียเลือดเมื่อโดนดาบ
-        }
-    }*/
-    
+        //hitEffect = GetComponent<CharacterHitEffect>();
+        playerHealth = maxHealth;
+    }
     public void TakeDamage(float damage)
     {
+        hitEffect.StartHitEffect();
         playerHealth -= damage;
+        DamageDisplay damageDisplay = this.GetComponent<DamageDisplay>();
+        damageDisplay.DisplayDamage(damage);
+        
         Debug.Log("Player has been hit");
         if (playerHealth > 0)
         {
@@ -37,10 +36,7 @@ public class PlayerHealth : MonoBehaviour
         
     }
     // Start is called before the first frame update
-    void Start()
-    {
-        playerHealth = maxHealth;
-    }
+
 
     // Update is called once per frame
     void Update()

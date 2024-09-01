@@ -98,7 +98,7 @@ public class AllyRangedCombat : MonoBehaviour
         {
             projectileMovement.SetTarget(target);
             projectileMovement.SetExplosionRadius(3f);
-            projectileMovement.SetDamage(10);
+          //  projectileMovement.SetDamage(10);
         }
     }
     

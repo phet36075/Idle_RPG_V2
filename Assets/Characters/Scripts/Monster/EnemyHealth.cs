@@ -8,7 +8,6 @@ public class EnemyHealth : MonoBehaviour
     [Header("-----------Health----------")]
     public float maxhealth = 50f;
     public string enemyName = "Enemy";
-  //  public float maxHealth = 100;
     public float currentHealth;
     public Slider healthBar;
     public bool isDead = false;
@@ -23,7 +22,6 @@ public class EnemyHealth : MonoBehaviour
     
     [Header("----------Stun duration----------")]
     public float staggerDuration = 0.5f;  // ระยะเวลาที่ศัตรูหยุดชะงัก
-    //private bool isStaggered = false;
     private float lastTimeStagger = 0;
     public float cooldownStagger = 4;
    private bool isHurt;
@@ -34,13 +32,11 @@ public class EnemyHealth : MonoBehaviour
        healthBar.maxValue = maxhealth;
        healthBar.value = currentHealth;
        spawner = FindObjectOfType<EnemySpawner>();
-       //healthBar = GetComponentInChildren<Slider>();
+       
    }
    
     public void TakeDamge(float damage)
     {
-      //  if (!isStaggered)
-       // {
        if (!isHurt)
        {
            // ลดเลือดหรือค่าพลังของศัตรูตามการโจมตี
@@ -67,7 +63,7 @@ public class EnemyHealth : MonoBehaviour
                 Die();
             }
            
-       // }
+     
     }
     public void ResetHurt()
     {
@@ -86,8 +82,7 @@ public class EnemyHealth : MonoBehaviour
             lastTimeStagger = Time.time + cooldownStagger;
             animator.SetTrigger("Hit");
         }
-
-       // isStaggered = true;
+        
         // หยุดการเคลื่อนไหวของศัตรูชั่วคราว
         GetComponent<EnemyAttack>().enabled = false;  // ปิดการเคลื่อนไหว
         Invoke("RecoverFromStagger", staggerDuration);  // กำหนดเวลาหยุดชะงัก
@@ -95,27 +90,19 @@ public class EnemyHealth : MonoBehaviour
     }
     void RecoverFromStagger()
     {
-     //  isStaggered = false;
+    
         GetComponent<EnemyAttack>().enabled = true;  // เปิดการเคลื่อนไหวกลับมา
     }
     
     
     void Die()
     {
-       /* TargetIndicator targetIndicator = this.GetComponent<TargetIndicator>();
-        targetIndicator.HideIndicator();*/
-        
-       spawner.OnEnemyDefeated();
+    
         isDead = true;
         animator.SetTrigger("Die");
         Destroy(gameObject,4f);
-        
-        //StartCoroutine(WaitAndDie());
-
     }
-    // Start is called before the first frame update
-   
-
+    
     void UpdateHealthBar()
     {
         StartCoroutine(SmoothHealthBar());
@@ -136,15 +123,8 @@ public class EnemyHealth : MonoBehaviour
 
         healthBar.value = currentHealth;
     }
-
-    IEnumerator WaitAndStun()
-    {
-        
-        yield return new WaitForSeconds(2);
-       
-    }
-
-    // Update is called once per frame
+    
+    
     void Update()
     {
         

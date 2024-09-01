@@ -16,40 +16,7 @@ public class StageManager : MonoBehaviour
 
     void Start()
     {
-        //LoadLevel(currentStage);
-    }
-
-    public void LoadLevel(int level)
-    {
-        environmentManager.LoadEnvironment(level - 1); // เปลี่ยนสภาพแวดล้อม
-        _EnemySpawner.SpawnEnemies(level); // สร้างศัตรู
-
-        if (level == 5)
-        {
-            Debug.Log("ด่านที่ 5! จะต้องสู้กับบอสก่อน!");
-            // เปลี่ยนเป้าหมาย AI ของผู้เล่นไปที่บอส
-            GameObject boss = GameObject.FindWithTag("Boss");
-            if (boss != null)
-            {
-                _AIController.SetTarget(boss.transform);
-            }
-        }
-    }
-
-    public void GoToNextLevel()
-    {
-
-        currentStage++;
-        LoadLevel(currentStage);
-
-    }
-
-    public void OnBossDefeated()
-    {
-        if (currentStage == 5)
-        {
-            GoToNextLevel(); // ไปยังด่านถัดไปหลังจากบอสถูกกำจัด
-        }
+        
     }
 
     public void Update()

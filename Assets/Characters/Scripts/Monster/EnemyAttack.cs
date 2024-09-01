@@ -8,7 +8,7 @@ public class EnemyAttack : MonoBehaviour
 {
     public float attackRange = 1f;
     public float attackCooldown = 1f;
-    public float attackDamage = 10;
+   
     private float lastAttackTime;
     public Collider enemySwordCollider;
     

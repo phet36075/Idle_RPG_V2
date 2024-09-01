@@ -688,10 +688,10 @@ ModelImporter:
       name: "\u306A\u3064\u3053"
     second: {fileID: 2100000, guid: cf2b5195f3f0b2141afdf7e920b7b6e8, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

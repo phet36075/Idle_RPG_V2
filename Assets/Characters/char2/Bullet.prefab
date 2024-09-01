@@ -120,9 +120,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  damage: 10
+  baseDamage: 5000
   explosionRadius: 3
-  hitEffectPrefab: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
+  hitEffectPrefab: {fileID: 417761080263594737, guid: 5cc74995f79fcd34e91b904cccd0293c, type: 3}
+  damageVariation: 0.2
 --- !u!1001 &6057640118542768574
 PrefabInstance:
   m_ObjectHideFlags: 0

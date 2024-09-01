@@ -60,7 +60,9 @@ public class ProjectileMovement : MonoBehaviour
     {
         if (hitEffectPrefab != null)
         {
-            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            GameObject effect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+            //Destroy(effect, 1f); // ลบ effect หลังจาก 2 วินาที
+            
         }
         int finalDamage = CalculateDamage();
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);

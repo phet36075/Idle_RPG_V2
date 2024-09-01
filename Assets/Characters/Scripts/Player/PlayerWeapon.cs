@@ -8,6 +8,13 @@ public class PlayerWeapon : MonoBehaviour
 {
     public float baseDamage = 10; // ดาเมจของดาบ
     public float damageVariation = 0.2f;
+    private PlayerAttack _playerAttack;
+
+    private void Start()
+    {
+        _playerAttack = GetComponent<PlayerAttack>();
+    }
+
     public void setDamage(float damage)
     {
         baseDamage += damage;
@@ -25,6 +32,7 @@ public class PlayerWeapon : MonoBehaviour
             int finalDamage = CalculateDamage();
             if (enemyHealth != null)
             {
+               // _playerAttack.PerformAttack();
                 enemyHealth.TakeDamge(finalDamage);
             }
         }

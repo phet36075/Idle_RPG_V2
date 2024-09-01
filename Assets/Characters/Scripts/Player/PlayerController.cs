@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class PlayerController : MonoBehaviour
 {
     public AIController aiController;
+    public NavMeshAgent agent;
 
     void Update()
     {
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         bool isAIEnabled = aiController.enabled;
         aiController.enabled = !isAIEnabled;
+        agent.enabled = !isAIEnabled;
         if (!isAIEnabled) // ถ้ากำลังจะเปลี่ยนไป AI Mode
         {
             aiController.FindNearestEnemy();

@@ -12,9 +12,9 @@ public class UIManager : MonoBehaviour
    
     public TextMeshProUGUI _txtTotalToDefeated;
     public TextMeshProUGUI _txtEnemiesDefeated;
-    public StageManager _StageManager;
+  //  public StageManager _StageManager;
 
-    public EnemySpawner _EnemySpawner;
+   // public EnemySpawner _EnemySpawner;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +25,8 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         _txtPlayerHealth.text = playerHealth.playerHealth.ToString();
-        _txtStage.text = _StageManager.currentStagetxt.ToString();
+       /* _txtStage.text = _StageManager.currentStagetxt.ToString();
         _txtEnemiesDefeated.text = _EnemySpawner.enemiesDefeated.ToString();
-        _txtTotalToDefeated.text = _EnemySpawner.totalEnemiesToDefeat.ToString();
+        _txtTotalToDefeated.text = _EnemySpawner.totalEnemiesToDefeat.ToString();*/
     }
 }
