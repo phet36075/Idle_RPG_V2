@@ -39,12 +39,16 @@ public class EnemyAttack : MonoBehaviour
                 if (enemyHealth.currentHealth <= 0)
                 {
                     //Debug.Log("Enemy IS DIE FR");
-                    agent.isStopped = true;
+                    
+                        //agent.SetDestination(transform.position);
+                       // agent.isStopped = true;
+                    
                 }
                 else
                 {
                     GetComponent<EnemyRoaming>().enabled = false;
-                    agent.isStopped = false;
+                    //agent.isStopped = false;
+                    
                     agent.SetDestination(player.position);
                     animator.SetBool("IsWalking",true);
                     animator.SetBool("IsAttacking",false);
@@ -54,7 +58,8 @@ public class EnemyAttack : MonoBehaviour
             else
             {
                 GetComponent<EnemyRoaming>().enabled = false;
-                agent.isStopped = true;
+                agent.SetDestination(transform.position);
+               // agent.isStopped = true;
                 animator.SetBool("IsWalking",false);
                 RotateTowardsTarget();
                 AttackPlayer();
@@ -63,7 +68,7 @@ public class EnemyAttack : MonoBehaviour
         else
         {
             GetComponent<EnemyRoaming>().enabled = true;
-            //agent.isStopped = true;
+            
             animator.SetBool("IsWalking",false);
             animator.SetBool("IsAttacking",false);
         }

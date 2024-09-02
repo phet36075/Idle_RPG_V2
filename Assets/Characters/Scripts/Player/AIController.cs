@@ -14,15 +14,16 @@ public class AIController : MonoBehaviour
     public float rotationSpeed = 5f;
     public GameObject indicatorPrefab; // Prefab ของ Indicator
     private GameObject currentIndicator;
-    
     private Transform nextLevelTarget; 
-    
     private bool moveToNextLevel = false;
-    public StageManager _StageManager;
-    public int stage = 0;
-    public EnvironmentManager _EnvironmentManager;
-    public EnemySpawner _EnemySpawner;
-    public bool isLastStage;
+    public AllyRangedCombat _AllyRangedCombat;
+    private SkillManager skillManager;
+
+    
+    
+    private float lastSkillUseTime;
+    public float skillUseInterval = 2f; // ระยะเวลาระหว่างการใช้สกิล
+    
     
     private void OnDisable()
     {
@@ -32,9 +33,9 @@ public class AIController : MonoBehaviour
         }
     }
     
-
     void Start()
     {
+        skillManager = GetComponent<SkillManager>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
@@ -63,8 +64,6 @@ public class AIController : MonoBehaviour
         if (nearestEnemy != null)
         {
             target = nearestEnemy.transform;
-           /* TargetIndicator targetIndicator = target.GetComponent<TargetIndicator>();
-            targetIndicator.ShowIndicator();*/
            if (currentIndicator != null)
            {
                Destroy(currentIndicator);
@@ -92,6 +91,7 @@ public class AIController : MonoBehaviour
            {
                // หากศัตรูตายแล้ว หาศัตรูใหม่
                    FindNearestEnemy();
+                   _AllyRangedCombat.CallAlliesToAttack();
            }
            else
            {
@@ -104,7 +104,9 @@ public class AIController : MonoBehaviour
                float distanceToTarget = Vector3.Distance(transform.position, target.position);
                if (distanceToTarget <= attackRange)
                {
-                   agent.isStopped = true;
+                   //agent.isStopped = true;
+                   TryUseSkill();
+                   agent.SetDestination(transform.position);
                    RotateTowardsTarget();
                    if (Time.time >= nextAttackTime)
                    {
@@ -115,7 +117,8 @@ public class AIController : MonoBehaviour
                }
                else
                {
-                   agent.isStopped = false;
+                  // agent.isStopped = false;
+                   agent.SetDestination(target.position);
                }
 
                animator.SetFloat("Speed", agent.velocity.magnitude);
@@ -127,6 +130,7 @@ public class AIController : MonoBehaviour
            if (moveToNextLevel == false)
            {
                FindNearestEnemy();
+               _AllyRangedCombat.CallAlliesToAttack();
                Destroy(currentIndicator);
            }
        }
@@ -152,5 +156,15 @@ public class AIController : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         //Debug.Log("Target Rotation: " + lookRotation.eulerAngles);  // ตรวจสอบการหมุนที่ควรจะเป็น
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+    private void TryUseSkill()
+    {
+        if (Time.time >= lastSkillUseTime + skillUseInterval)
+        {
+            if (skillManager.UseNextAvailableSkill())
+            {
+                lastSkillUseTime = Time.time;
+            }
+        }
     }
 }

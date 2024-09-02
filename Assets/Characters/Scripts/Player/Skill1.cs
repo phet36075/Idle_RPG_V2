@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Skill1 : MonoBehaviour,ISkill
 {
@@ -19,7 +22,13 @@ public class Skill1 : MonoBehaviour,ISkill
     public float maxAngle = 45f;
     public float skillRange = 2f; // ระยะห่างจากตัวละครที่สกิลจะเกิดผล
     public PlayerWeapon PlayerWeapon;
-   
+    private float lastUseTime = -Mathf.Infinity;
+    private AIController _aiController;
+
+    private void Start()
+    {
+        _aiController = FindObjectOfType<AIController>();
+    }
 
     public void UseSkill()
     {
@@ -39,7 +48,7 @@ public class Skill1 : MonoBehaviour,ISkill
     {
         // เล่น animation
         animator.SetTrigger("UseSkill");
-
+        lastUseTime = Time.time;
         // รอให้ animation เล่นจบ (สมมติว่าใช้เวลา 1 วินาที)
         yield return new WaitForSeconds(2.8f);
         
@@ -47,6 +56,7 @@ public class Skill1 : MonoBehaviour,ISkill
         // คำนวณตำแหน่งและทิศทางสำหรับ effect
        Vector3 effectPosition = transform.position + transform.forward * 2f;
         Quaternion effectRotation = transform.rotation;
+        
         int finalDamage = CalculateDamage();
         // ปล่อยดาเมจ
         Vector3 skillCenter = transform.position + transform.forward * skillRange;
@@ -67,15 +77,18 @@ public class Skill1 : MonoBehaviour,ISkill
        
         GameObject effect = Instantiate(skillEffectPrefab, effectPosition, effectRotation);
         Destroy(effect, 2f); // ลบ effect หลังจาก 2 วินาที
-
+        //_aiController.GetComponent<NavMeshAgent>().enabled = true;
         // เริ่มคูลดาวน์
         StartCoroutine(Cooldown());
     }
-
+    private IEnumerator Cooldown()
+    {
+        isOnCooldown = true;
+        yield return new WaitForSeconds(cooldownTime);
+        isOnCooldown = false;
+    }
     public void ShowEffect1()
     {
-        
-        
         Vector3 effectPosition = transform.position + transform.forward * 2f;
         Quaternion effectRotation = transform.rotation;
         GameObject effect = Instantiate(skillEffectPrefabSlash, effectPosition, effectRotation);
@@ -96,20 +109,36 @@ public class Skill1 : MonoBehaviour,ISkill
             
         }
     }
-    bool IsInFront(Vector3 targetPosition)
-    {
-        Vector3 directionToTarget = targetPosition - transform.position;
-        directionToTarget.y = 0; // ไม่สนใจความสูง
 
-        float angle = Vector3.Angle(transform.forward, directionToTarget);
-        return angle <= maxAngle;
-    }
-    private IEnumerator Cooldown()
+    public void EnableNav()
     {
-        isOnCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
-        isOnCooldown = false;
+        _aiController.GetComponent<NavMeshAgent>().enabled = true;
     }
+
+    public void DisableNav()
+    {
+        _aiController.GetComponent<NavMeshAgent>().enabled = false;
+    }
+    public float GetCooldownPercentage()
+    {
+        float timeSinceLastUse = Time.time - lastUseTime;
+        if (timeSinceLastUse < cooldownTime)
+        {
+            return 1f - (timeSinceLastUse / cooldownTime);
+        }
+        return 0f;
+    }
+    public float GetRemainingCooldownTime()
+    {
+        float timeSinceLastUse = Time.time - lastUseTime;
+        if (timeSinceLastUse < cooldownTime)
+        {
+            return cooldownTime - timeSinceLastUse;
+        }
+        return 0f;
+    }
+   
+    
     public bool IsOnCooldown()
     {
         return isOnCooldown;
@@ -119,7 +148,14 @@ public class Skill1 : MonoBehaviour,ISkill
     {
         return cooldownTime;
     }
-    
+    bool IsInFront(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = targetPosition - transform.position;
+        directionToTarget.y = 0; // ไม่สนใจความสูง
+
+        float angle = Vector3.Angle(transform.forward, directionToTarget);
+        return angle <= maxAngle;
+    }
     private void OnDrawGizmos()
     {
 #if UNITY_EDITOR

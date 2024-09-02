@@ -28,7 +28,40 @@ public class AllyRangedCombat : MonoBehaviour
             nextFireTime = Time.time + 1f/fireRate; // กำหนดเวลาการยิงครั้งถัดไป
         }
     }
+    public void CallAlliesToAttack()
+    {
+        Transform enemy = FindEnemyInRange();  // ฟังก์ชันเพื่อค้นหาศัตรูในระยะใกล้
+        if (enemy != null)
+        {
+            AttackEnemy(enemy);
+        }
+    }
+    
+    Transform FindEnemyInRange()
+    {
+        float detectionRadius = 10f; // ระยะการตรวจจับศัตรู
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        Transform closestEnemy = null;
+        float closestDistance = Mathf.Infinity;
 
+        foreach (Collider collider in hitColliders)
+        {
+            if (collider.CompareTag("Enemy")) // ตรวจสอบว่าเป็นศัตรูหรือไม่
+            {
+                float distanceToEnemy = Vector3.Distance(transform.position, collider.transform.position);
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    closestEnemy = collider.transform;
+                }
+            }
+        }
+
+        return closestEnemy; // คืนค่า Transform ของศัตรูที่อยู่ใกล้ที่สุด
+    }
+    
+    
+    
     void ContinueAttacking()
     {
         float distance = Vector3.Distance(player.position, transform.position);
@@ -37,7 +70,6 @@ public class AllyRangedCombat : MonoBehaviour
             EnemyHealth enemyHealth = target.GetComponent<EnemyHealth>();
             if (enemyHealth != null && enemyHealth.currentHealth > 0)
             {
-                
                 
                 if (Time.time >= nextFireTime)
                 {

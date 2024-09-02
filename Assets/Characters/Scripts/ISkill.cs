@@ -7,4 +7,6 @@ public interface ISkill
     void UseSkill();
     bool IsOnCooldown();
     float GetCooldownTime();
+    float GetCooldownPercentage();
+    float GetRemainingCooldownTime();
 }

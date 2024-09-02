@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public float playerHealth;
     public float maxHealth = 1000;
     private Animator animator;
-   
+    public AIController _AIController;
 
     public CharacterHitEffect hitEffect;
     void Start()
@@ -18,6 +18,7 @@ public class PlayerHealth : MonoBehaviour
     }
     public void TakeDamage(float damage)
     {
+        //_AIController.FindNearestEnemy();
         hitEffect.StartHitEffect();
         playerHealth -= damage;
         DamageDisplay damageDisplay = this.GetComponent<DamageDisplay>();

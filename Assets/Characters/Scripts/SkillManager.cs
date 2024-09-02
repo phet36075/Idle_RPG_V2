@@ -32,4 +32,46 @@ public class SkillManager : MonoBehaviour
             skills[index].UseSkill();
         }
     }
+    
+    public bool UseNextAvailableSkill()
+    {
+        for (int i = 0; i < skills.Count; i++)
+        {
+            if (!skills[i].IsOnCooldown())
+            {
+                skills[i].UseSkill();
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public float GetSkillCooldownPercentage(int index)
+    {
+        if (index >= 0 && index < skills.Count)
+        {
+            return skills[index].GetCooldownPercentage();
+        }
+        return 0f;
+    }
+    
+
+    public float GetSkillCooldownTime(int index)
+    {
+        if (index >= 0 && index < skills.Count)
+        {
+            return skills[index].GetCooldownTime();
+        }
+        return 0f;
+    }
+    public float GetRemainingCooldownTime(int index)
+    {
+        if (index >= 0 && index < skills.Count)
+        {
+            return skills[index].GetRemainingCooldownTime();
+        }
+        return 0f;
+    }
+    
+    
 }

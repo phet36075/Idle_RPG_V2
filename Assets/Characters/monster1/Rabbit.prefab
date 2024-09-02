@@ -187,7 +187,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1143799019572119445
 Transform:
   m_ObjectHideFlags: 0
@@ -712,6 +712,7 @@ MonoBehaviour:
   enemyCollider: {fileID: 8809294430291930545}
   staggerDuration: 0.5
   cooldownStagger: 5
+  CharacterHitEffect: {fileID: 1277579419201185817}
 --- !u!114 &6712980559664603852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,6 +1551,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5303997541401275298}
   - component: {fileID: 6322647262009516211}
+  - component: {fileID: 1277579419201185817}
   m_Layer: 7
   m_Name: Body
   m_TagString: Untagged
@@ -1725,6 +1727,20 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0015449524, y: 3.4970212, z: -0.4038309}
     m_Extent: {x: 3.284835, y: 6.924916, z: 2.711361}
   m_DirtyAABB: 0
+--- !u!114 &1277579419201185817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4048155580634172886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85af7f135bd73274b8b09f76f57c53f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  effectDuration: 0.2
+  hitColor: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
 --- !u!1 &4081950956577574686
 GameObject:
   m_ObjectHideFlags: 0

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  baseDamage: 5000
+  baseDamage: 30
   explosionRadius: 3
   hitEffectPrefab: {fileID: 417761080263594737, guid: 5cc74995f79fcd34e91b904cccd0293c, type: 3}
   damageVariation: 0.2

@@ -2943,7 +2943,7 @@ Material:
     - _ShadingRampedLightMapInverseApplyGlobalMaskBlendType: 2
     - _ShadingRampedLightMapInverseApplyGlobalMaskIndex: 0
     - _ShadingShadeMapBlendType: 0
-    - _Shadow2ndBlur: 0.1
+    - _Shadow2ndBlur: 0
     - _Shadow2ndBorder: 0.15
     - _Shadow2ndColorTexUV: 0
     - _Shadow2ndNormalStrength: 1
@@ -2955,11 +2955,11 @@ Material:
     - _Shadow3rdReceive: 0
     - _ShadowBlur: 0
     - _ShadowBlurMaskLOD: 0
-    - _ShadowBorder: 0.271
+    - _ShadowBorder: 0.219
     - _ShadowBorderMapToggle: 0
     - _ShadowBorderMaskLOD: 0
     - _ShadowBorderMaskUV: 0
-    - _ShadowBorderRange: 0.08
+    - _ShadowBorderRange: 0
     - _ShadowCapBlend: 1
     - _ShadowCapBlendMode: 3
     - _ShadowCapNormalMix: 1
@@ -2970,7 +2970,7 @@ Material:
     - _ShadowFlatBlur: 1
     - _ShadowFlatBorder: 1
     - _ShadowIndirectIntensity: 0.25
-    - _ShadowMainStrength: 0.619
+    - _ShadowMainStrength: 0
     - _ShadowMaskType: 0
     - _ShadowNormalStrength: 1
     - _ShadowOffset: 0
@@ -2989,7 +2989,7 @@ Material:
     - _ShadowPostAO: 0
     - _ShadowReceive: 1
     - _ShadowSteps: 4
-    - _ShadowStrength: 1
+    - _ShadowStrength: 0.664
     - _ShadowStrengthMaskLOD: 0
     - _ShadowUseStep: 0
     - _Shadowborder: 0.579
@@ -4388,7 +4388,7 @@ Material:
     - _Set_HighColorMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _Set_Rim2LightMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _Set_RimLightMaskPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Shadow2ndColor: {r: 0.68, g: 0.66, b: 0.79, a: 1}
+    - _Shadow2ndColor: {r: 0.68, g: 0.65999997, b: 0.78999996, a: 0}
     - _Shadow2ndColorTexPan: {r: 0, g: 0, b: 0, a: 0}
     - _Shadow3rdColor: {r: 0, g: 0, b: 0, a: 0}
     - _Shadow3rdColorTexPan: {r: 0, g: 0, b: 0, a: 0}

@@ -25,6 +25,7 @@ public class EnemyHealth : MonoBehaviour
     private float lastTimeStagger = 0;
     public float cooldownStagger = 4;
    private bool isHurt;
+   public CharacterHitEffect CharacterHitEffect;
 
    void Start()
    {
@@ -39,6 +40,7 @@ public class EnemyHealth : MonoBehaviour
     {
        if (!isHurt)
        {
+           CharacterHitEffect.StartHitEffect();
            // ลดเลือดหรือค่าพลังของศัตรูตามการโจมตี
            animator.SetBool("isHurt", true);
            isHurt = true;
@@ -56,10 +58,7 @@ public class EnemyHealth : MonoBehaviour
             }
             if (currentHealth <= 0)
             {
-                enemyCollider.enabled = false;
-                animator.SetBool("IsWalking",false);
-                animator.SetBool("IsAttacking",false);
-                currentHealth = 0;
+               
                 Die();
             }
            
@@ -100,7 +99,12 @@ public class EnemyHealth : MonoBehaviour
     
         isDead = true;
         animator.SetTrigger("Die");
-        Destroy(gameObject,4f);
+        GetComponent<NavMeshAgent>().enabled = false;
+        Destroy(gameObject,3f);
+        enemyCollider.enabled = false;
+        animator.SetBool("IsWalking",false);
+        animator.SetBool("IsAttacking",false);
+        currentHealth = 0;
     }
     
     void UpdateHealthBar()

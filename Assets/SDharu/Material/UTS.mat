@@ -3037,7 +3037,7 @@ Material:
     - _Shadow3rdReceive: 0
     - _ShadowBlur: 0
     - _ShadowBlurMaskLOD: 0
-    - _ShadowBorder: 0.214
+    - _ShadowBorder: 0.238
     - _ShadowBorderMapToggle: 0
     - _ShadowBorderMaskLOD: 0
     - _ShadowBorderMaskUV: 0
@@ -3071,7 +3071,7 @@ Material:
     - _ShadowPostAO: 0
     - _ShadowReceive: 1
     - _ShadowSteps: 4
-    - _ShadowStrength: 1
+    - _ShadowStrength: 0.318
     - _ShadowStrengthMaskLOD: 0
     - _ShadowUseStep: 0
     - _Shadowborder: 0.6
