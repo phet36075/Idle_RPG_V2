@@ -21,19 +21,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Material
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: df12117ecd77c31469c224178886498e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
-  m_ValidKeywords:
-  - _ENVIRONMENTREFLECTIONS_OFF
-  m_InvalidKeywords:
-  - _GLOSSYREFLECTIONS_OFF
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -2960,9 +2957,9 @@ Material:
     - _Shadow3rdColorTexUV: 0
     - _Shadow3rdNormalStrength: 1
     - _Shadow3rdReceive: 0
-    - _ShadowBlur: 0.1
+    - _ShadowBlur: 0
     - _ShadowBlurMaskLOD: 0
-    - _ShadowBorder: 0.5
+    - _ShadowBorder: 0
     - _ShadowBorderMapToggle: 0
     - _ShadowBorderMaskLOD: 0
     - _ShadowBorderMaskUV: 0
@@ -2994,7 +2991,7 @@ Material:
     - _ShadowPlanBUsePlanB: 0
     - _ShadowPlanBValueFromBase: 1
     - _ShadowPostAO: 0
-    - _ShadowReceive: 0
+    - _ShadowReceive: 1
     - _ShadowSteps: 4
     - _ShadowStrength: 1
     - _ShadowStrengthMaskLOD: 0
@@ -3167,7 +3164,7 @@ Material:
     - _UseReflectionProbe: 1
     - _UseRim: 0
     - _UseRimShade: 0
-    - _UseShadow: 0
+    - _UseShadow: 1
     - _UseVertexLight: 1
     - _Use_1stAs2nd: 0
     - _Use_1stShadeMapAlpha_As_ShadowMask: 0

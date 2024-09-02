@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillSystem : MonoBehaviour
+public class Skill1 : MonoBehaviour,ISkill
 {
     public Animator animator;
     public float damageRadius = 10f;
@@ -19,17 +19,15 @@ public class SkillSystem : MonoBehaviour
     public float maxAngle = 45f;
     public float skillRange = 2f; // ระยะห่างจากตัวละครที่สกิลจะเกิดผล
     public PlayerWeapon PlayerWeapon;
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && !isOnCooldown)
-        {
-            UseSkill();
-        }
-    }
+   
 
-    void UseSkill()
+    public void UseSkill()
     {
-        StartCoroutine(SkillSequence());
+        if (!isOnCooldown)
+        {
+            isOnCooldown = true;
+            StartCoroutine(SkillSequence());
+        }
     }
     int CalculateDamage()
     {
@@ -106,13 +104,21 @@ public class SkillSystem : MonoBehaviour
         float angle = Vector3.Angle(transform.forward, directionToTarget);
         return angle <= maxAngle;
     }
-    IEnumerator Cooldown()
+    private IEnumerator Cooldown()
     {
         isOnCooldown = true;
         yield return new WaitForSeconds(cooldownTime);
         isOnCooldown = false;
     }
-    
+    public bool IsOnCooldown()
+    {
+        return isOnCooldown;
+    }
+
+    public float GetCooldownTime()
+    {
+        return cooldownTime;
+    }
     
     private void OnDrawGizmos()
     {

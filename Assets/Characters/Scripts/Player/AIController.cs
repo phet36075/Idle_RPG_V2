@@ -71,39 +71,20 @@ public class AIController : MonoBehaviour
            }
            // show indicator
            currentIndicator = Instantiate(indicatorPrefab, target.transform.position, Quaternion.identity);
-           
-            
         }
         else
         {
             target = null; // ไม่มีศัตรูในระยะ
-           
-          /*  TargetIndicator targetIndicator = target.GetComponent<TargetIndicator>();
-            targetIndicator.HideIndicator();*/
             Destroy(currentIndicator);
-            
-            
         }
     }
-
-
+   
     void Update()
     {
-        
         if (currentIndicator != null)
         {
             currentIndicator.transform.position = new Vector3(target.transform.position.x,currentIndicator.transform.position.y,target.transform.position.z);
         }
-       /* if (target == null || Vector3.Distance(transform.position, target.position) > attackRange)
-        {
-            FindNearestEnemy();
-        }
-        FindNearestEnemy();
-        
-        if (!target) // หาเป้าหมายถ้าไม่มี
-        {
-            FindNearestEnemy();
-        }*/
        if (target != null)
        {
            EnemyHealth targetEnemy = target.GetComponent<EnemyHealth>();
@@ -119,7 +100,6 @@ public class AIController : MonoBehaviour
                {
                    agent.SetDestination(target.position);
                }
-              
                
                float distanceToTarget = Vector3.Distance(transform.position, target.position);
                if (distanceToTarget <= attackRange)
@@ -149,54 +129,8 @@ public class AIController : MonoBehaviour
                FindNearestEnemy();
                Destroy(currentIndicator);
            }
-           
-         //  FindNearestEnemy();
-         
-          
        }
     }
-    
-    /* public void MoveToNextLevel()
-     {
-        // _EnemySpawner.ClearEnemies();
-         moveToNextLevel = true;
-         Destroy(currentIndicator);
-         nextLevelTarget = GameObject.FindGameObjectWithTag("NextLevelPosition").transform;
-        agent.SetDestination(nextLevelTarget.position);
-        
-        _EnemySpawner.enemiesDefeated = 0;
-        Debug.Log("กำลังเดินไปที่จุด!");
-        // ตรวจสอบว่าผู้เล่นไปถึงจุดหมายปลายทางหรือไม่
-        if (Vector3.Distance(transform.position, nextLevelTarget.position) < 0.5f)
-        {
-            if (_StageManager.stage != _EnvironmentManager.AllStage)
-            {
-                _EnemySpawner.enemiesDefeated = 0;
-                _StageManager.stage += 1;
-                Debug.Log("ถึงด่านใหม่แล้ว! ด่านที่ :" + stage);
-                _EnvironmentManager.LoadEnvironment(_StageManager.stage);
-                moveToNextLevel = false;
-            }
-            else
-            {
-                isLastStage = true;
-                Debug.Log("ด่านสุดท้ายแล้ว ด่านที่ :" + stage);
-                moveToNextLevel = false;
-                FindNearestEnemy();
-                agent.SetDestination(target.position);
-            }
-            
-           
-         //  _StageManager.GoToNextLevel();
-           //moveToNextLevel = false;
-           
-           
-            // ใส่ Logic การโหลดด่านใหม่ที่นี่ เช่น
-            // SceneManager.LoadScene("NextLevel");
-        }
-    }*/
-    
-    
     
     public void SetTarget(Transform newTarget)
     {
@@ -219,6 +153,4 @@ public class AIController : MonoBehaviour
         //Debug.Log("Target Rotation: " + lookRotation.eulerAngles);  // ตรวจสอบการหมุนที่ควรจะเป็น
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
-    
-    
 }

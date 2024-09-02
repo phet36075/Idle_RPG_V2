@@ -8,23 +8,16 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: UTS
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: df12117ecd77c31469c224178886498e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords:
-  - BSSBLOOMFOGTYPE_HEIGHT
-  - VIGNETTE_MASKED
-  - _LIGHTINGMODE_FLAT
-  - _RIM2STYLE_POIYOMI
-  - _RIMSTYLE_POIYOMI
-  - _STOCHASTICMODE_DELIOT_HEITZ
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
-  stringTagMap:
-    RenderType: Opaque
+  stringTagMap: {}
   disabledShaderPasses: []
   m_LockedProperties: _EnableOutlines
   m_SavedProperties:
@@ -91,7 +84,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseColorMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 49302af953ae5a74eba2e3223e28cb69, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -3042,9 +3035,9 @@ Material:
     - _Shadow3rdColorTexUV: 0
     - _Shadow3rdNormalStrength: 1
     - _Shadow3rdReceive: 0
-    - _ShadowBlur: 0.1
+    - _ShadowBlur: 0
     - _ShadowBlurMaskLOD: 0
-    - _ShadowBorder: 0.5
+    - _ShadowBorder: 0.214
     - _ShadowBorderMapToggle: 0
     - _ShadowBorderMaskLOD: 0
     - _ShadowBorderMaskUV: 0
@@ -3059,7 +3052,7 @@ Material:
     - _ShadowFlatBlur: 1
     - _ShadowFlatBorder: 1
     - _ShadowIndirectIntensity: 0.25
-    - _ShadowMainStrength: 0
+    - _ShadowMainStrength: 0.581
     - _ShadowMaskType: 0
     - _ShadowNormalStrength: 1
     - _ShadowOffset: 0
@@ -3076,9 +3069,9 @@ Material:
     - _ShadowPlanBUsePlanB: 0
     - _ShadowPlanBValueFromBase: 1
     - _ShadowPostAO: 0
-    - _ShadowReceive: 0
+    - _ShadowReceive: 1
     - _ShadowSteps: 4
-    - _ShadowStrength: 0.5
+    - _ShadowStrength: 1
     - _ShadowStrengthMaskLOD: 0
     - _ShadowUseStep: 0
     - _Shadowborder: 0.6
@@ -3256,7 +3249,7 @@ Material:
     - _UseReflectionProbe: 1
     - _UseRim: 0
     - _UseRimShade: 0
-    - _UseShadow: 0
+    - _UseShadow: 1
     - _UseVertexLight: 1
     - _Use_1stAs2nd: 0
     - _Use_1stShadeMapAlpha_As_ShadowMask: 0

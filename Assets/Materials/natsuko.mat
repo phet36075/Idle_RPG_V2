@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: natsuko
-  m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
+  m_Shader: {fileID: 4800000, guid: df12117ecd77c31469c224178886498e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -22,7 +22,6 @@ Material:
       _RIMSTYLE_POIYOMI _STOCHASTICMODE_DELIOT_HEITZ
     OriginalShader: .poiyomi/Poiyomi Toon
     OriginalShaderGUID: 23f6705aff8bf964c87bfb3dd66ab345
-    RenderType: Opaque
   disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
@@ -1222,6 +1221,7 @@ Material:
     - _CustomColors: 0
     - _CustomShadow2nd: 0
     - _Cutoff: 0.5
+    - _CutoutCutoutAdjust: 0.5
     - _Decal0ApplyGlobalMaskBlendType: 0
     - _Decal0ApplyGlobalMaskIndex: 0
     - _Decal0ChannelSeparation: 0
@@ -2514,6 +2514,7 @@ Material:
     - _OutlineClipAtZeroWidth: 0
     - _OutlineColorMask: 15
     - _OutlineCull: 1
+    - _OutlineCutoffRange: 0.5
     - _OutlineDeleteMesh: 0
     - _OutlineDisableInVR: 0
     - _OutlineDstBlend: 0
@@ -2942,8 +2943,8 @@ Material:
     - _ShadingRampedLightMapInverseApplyGlobalMaskBlendType: 2
     - _ShadingRampedLightMapInverseApplyGlobalMaskIndex: 0
     - _ShadingShadeMapBlendType: 0
-    - _Shadow2ndBlur: 0.3
-    - _Shadow2ndBorder: 0.5
+    - _Shadow2ndBlur: 0.1
+    - _Shadow2ndBorder: 0.15
     - _Shadow2ndColorTexUV: 0
     - _Shadow2ndNormalStrength: 1
     - _Shadow2ndReceive: 0
@@ -2952,13 +2953,13 @@ Material:
     - _Shadow3rdColorTexUV: 0
     - _Shadow3rdNormalStrength: 1
     - _Shadow3rdReceive: 0
-    - _ShadowBlur: 0.1
+    - _ShadowBlur: 0
     - _ShadowBlurMaskLOD: 0
-    - _ShadowBorder: 0.5
+    - _ShadowBorder: 0.271
     - _ShadowBorderMapToggle: 0
     - _ShadowBorderMaskLOD: 0
     - _ShadowBorderMaskUV: 0
-    - _ShadowBorderRange: 0
+    - _ShadowBorderRange: 0.08
     - _ShadowCapBlend: 1
     - _ShadowCapBlendMode: 3
     - _ShadowCapNormalMix: 1
@@ -2969,7 +2970,7 @@ Material:
     - _ShadowFlatBlur: 1
     - _ShadowFlatBorder: 1
     - _ShadowIndirectIntensity: 0.25
-    - _ShadowMainStrength: 0
+    - _ShadowMainStrength: 0.619
     - _ShadowMaskType: 0
     - _ShadowNormalStrength: 1
     - _ShadowOffset: 0
@@ -2986,9 +2987,9 @@ Material:
     - _ShadowPlanBUsePlanB: 0
     - _ShadowPlanBValueFromBase: 1
     - _ShadowPostAO: 0
-    - _ShadowReceive: 0
+    - _ShadowReceive: 1
     - _ShadowSteps: 4
-    - _ShadowStrength: 0.207
+    - _ShadowStrength: 1
     - _ShadowStrengthMaskLOD: 0
     - _ShadowUseStep: 0
     - _Shadowborder: 0.579
@@ -3159,7 +3160,7 @@ Material:
     - _UseReflectionProbe: 1
     - _UseRim: 0
     - _UseRimShade: 0
-    - _UseShadow: 0
+    - _UseShadow: 1
     - _UseVertexLight: 1
     - _Use_1stAs2nd: 0
     - _Use_1stShadeMapAlpha_As_ShadowMask: 0
@@ -4387,15 +4388,15 @@ Material:
     - _Set_HighColorMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _Set_Rim2LightMaskPan: {r: 0, g: 0, b: 0, a: 0}
     - _Set_RimLightMaskPan: {r: 0, g: 0, b: 0, a: 0}
-    - _Shadow2ndColor: {r: 0, g: 0, b: 0, a: 0}
+    - _Shadow2ndColor: {r: 0.68, g: 0.66, b: 0.79, a: 1}
     - _Shadow2ndColorTexPan: {r: 0, g: 0, b: 0, a: 0}
     - _Shadow3rdColor: {r: 0, g: 0, b: 0, a: 0}
     - _Shadow3rdColorTexPan: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowAOShift: {r: 0, g: 1, b: 0, a: 1}
-    - _ShadowAOShift2: {r: 0, g: 1, b: 0, a: 1}
-    - _ShadowBorderColor: {r: 1, g: 0, b: 0, a: 1}
+    - _ShadowAOShift: {r: 1, g: 0, b: 1, a: 0}
+    - _ShadowAOShift2: {r: 1, g: 0, b: 1, a: 0}
+    - _ShadowBorderColor: {r: 1, g: 0.1, b: 0, a: 1}
     - _ShadowBorderMaskPan: {r: 0, g: 0, b: 0, a: 0}
-    - _ShadowColor: {r: 0.7, g: 0.75, b: 0.85, a: 1}
+    - _ShadowColor: {r: 0.82, g: 0.76, b: 0.85, a: 1}
     - _ShadowColorTexPan: {r: 0, g: 0, b: 0, a: 0}
     - _ShadowPlanB2CustomShadowTextureRGB: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowPlanBCustomShadowTextureRGB: {r: 1, g: 1, b: 1, a: 1}
