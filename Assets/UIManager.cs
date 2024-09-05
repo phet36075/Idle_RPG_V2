@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public PlayerHealth playerHealth;
+    public PlayerStats playerHealth;
     public TextMeshProUGUI _txtPlayerHealth;
     public TextMeshProUGUI _txtStage;
     //public AIController _AIController;
@@ -24,9 +24,9 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _txtPlayerHealth.text = playerHealth.playerHealth.ToString();
-       /* _txtStage.text = _StageManager.currentStagetxt.ToString();
-        _txtEnemiesDefeated.text = _EnemySpawner.enemiesDefeated.ToString();
-        _txtTotalToDefeated.text = _EnemySpawner.totalEnemiesToDefeat.ToString();*/
+        _txtPlayerHealth.text = playerHealth.currentHealth.ToString("0");
+        /* _txtStage.text = _StageManager.currentStagetxt.ToString();
+         _txtEnemiesDefeated.text = _EnemySpawner.enemiesDefeated.ToString();
+         _txtTotalToDefeated.text = _EnemySpawner.totalEnemiesToDefeat.ToString();*/
     }
 }

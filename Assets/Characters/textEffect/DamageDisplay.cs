@@ -4,7 +4,8 @@ using UnityEngine;
 using TMPro;
 public class DamageDisplay : MonoBehaviour
 {
-    public GameObject damageTextPrefab, textLocation;
+    public GameObject damageTextPrefab, damageTextPrefabCritical, textLocation;
+    
     public string textToDisplay;
     //private Transform cam;
 
@@ -38,7 +39,14 @@ public class DamageDisplay : MonoBehaviour
         GameObject damgeTextInstance = Instantiate(damageTextPrefab, textLocation.transform);
        // cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
        
-        damgeTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString());
+        damgeTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString("0"));
+    }
+    public void DisplayDamageCritical(float damage)
+    {
+        GameObject damgeTextInstance = Instantiate(damageTextPrefabCritical, textLocation.transform);
+        // cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
+       
+        damgeTextInstance.transform.GetChild(0).GetComponent<TextMeshPro>().SetText(damage.ToString("0"));
     }
 
     // Update is called once per frame

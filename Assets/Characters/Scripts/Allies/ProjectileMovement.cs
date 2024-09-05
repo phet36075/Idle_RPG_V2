@@ -71,7 +71,7 @@ public class ProjectileMovement : MonoBehaviour
             EnemyHealth enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamge(finalDamage);
+                enemyHealth.TakeDamage(finalDamage);
             }
         }
         Destroy(gameObject);

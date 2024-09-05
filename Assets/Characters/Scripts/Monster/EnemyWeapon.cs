@@ -15,7 +15,7 @@ public class EnemyWeapon : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // เข้าถึงสคริปต์ PlayerHealth ของผู้เล่น
-            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            PlayerStats playerHealth = other.GetComponent<PlayerStats>();
             int finalDamage = CalculateDamage();
             if (playerHealth != null)
             {

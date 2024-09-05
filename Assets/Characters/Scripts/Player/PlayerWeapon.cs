@@ -6,42 +6,34 @@ using Random = UnityEngine.Random;
 
 public class PlayerWeapon : MonoBehaviour
 {
-    public float baseDamage = 10; // ดาเมจของดาบ
-    public float damageVariation = 0.2f;
+  
     private PlayerAttack _playerAttack;
-
+    private PlayerStats _playerStats;
     private void Start()
     {
         _playerAttack = GetComponent<PlayerAttack>();
-    }
-
-    public void setDamage(float damage)
-    {
-        baseDamage += damage;
+        _playerStats = FindObjectOfType<PlayerStats>();
     }
     
-    public float getDamage()
-    {
-        return baseDamage;
-    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
-            int finalDamage = CalculateDamage();
+            
             if (enemyHealth != null)
             {
                // _playerAttack.PerformAttack();
-                enemyHealth.TakeDamge(finalDamage);
+               
+               PlayerStats playerStats = GetComponent<PlayerStats>();
+              
+                
+               //Skill Damage
+               float attackDamage = playerStats.CalculatePlayerAttackDamage();
+               enemyHealth.TakeDamage(attackDamage,playerStats.PlayerData.armorPenetration);
             }
         }
     }
-    int CalculateDamage()
-    {
-        float randomFactor = Random.Range(1f - damageVariation, 1f + damageVariation);
-        int finalDamage = Mathf.RoundToInt(baseDamage * randomFactor);
-        return finalDamage;
-        
-    }
+   
 }

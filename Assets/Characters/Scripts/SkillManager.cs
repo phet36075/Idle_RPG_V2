@@ -11,8 +11,16 @@ public class SkillManager : MonoBehaviour
     {
         skills.Add(GetComponent<Skill1>());
         skills.Add(GetComponent<Skill2>());
+        skills.Add(GetComponent<Skill3>());
     }
-
+    public ISkill GetSkill(int index)
+    {
+        if (index >= 0 && index < skills.Count)
+        {
+            return skills[index];
+        }
+        return null;
+    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -22,6 +30,10 @@ public class SkillManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.E))
         {
            UseSkill(1); // ใช้สกิลที่สอง
+        }
+        else if(Input.GetKeyDown(KeyCode.R))
+        {
+            UseSkill(2);
         }
     }
 
