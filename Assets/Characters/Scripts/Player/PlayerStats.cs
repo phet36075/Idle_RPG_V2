@@ -18,6 +18,7 @@ public class PlayerStats : MonoBehaviour
     // Damage variation
     public float damageVariation = 0.2f; // 20% variation
 */
+    
     public float currentHealth;
     private DamageDisplay _damageDisplay;
     
@@ -29,7 +30,7 @@ public class PlayerStats : MonoBehaviour
     void Start()
     {
         //hitEffect = GetComponent<CharacterHitEffect>();
-       currentHealth = PlayerData.maxHealth;
+       currentHealth = PlayerData.currentHealth;
         _damageDisplay = FindObjectOfType<DamageDisplay>();
     }
     public float CalculateFinalDamage(float incomingDamage, float targetDefense)

@@ -33,27 +33,18 @@ public class EnemyAttack : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
         if (distanceToPlayer <= chaseRange)
         {
+            
             if (distanceToPlayer > attackRange)
             {
                 EnemyHealth enemyHealth = this.GetComponent<EnemyHealth>();
-                if (enemyHealth.currentHealth <= 0)
-                {
-                    //Debug.Log("Enemy IS DIE FR");
-                    
-                        //agent.SetDestination(transform.position);
-                       // agent.isStopped = true;
-                    
-                }
-                else
+                if (enemyHealth.currentHealth > 0)
                 {
                     GetComponent<EnemyRoaming>().enabled = false;
                     //agent.isStopped = false;
-                    
                     agent.SetDestination(player.position);
                     animator.SetBool("IsWalking",true);
                     animator.SetBool("IsAttacking",false);
                 }
-                
             }
             else
             {

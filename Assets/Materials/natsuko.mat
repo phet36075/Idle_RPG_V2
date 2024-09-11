@@ -404,9 +404,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Main3rdTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: bbf58bf7b674d014184924a2b148f506, type: 3}
         m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Offset: {x: 0.5, y: 0}
     - _MainColorAdjustMask:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -2197,7 +2197,7 @@ Material:
     - _Main3rdTexAlphaMode: 0
     - _Main3rdTexAngle: 0
     - _Main3rdTexBlendMode: 0
-    - _Main3rdTexIsDecal: 0
+    - _Main3rdTexIsDecal: 1
     - _Main3rdTexIsLeftOnly: 0
     - _Main3rdTexIsMSDF: 0
     - _Main3rdTexIsRightOnly: 0

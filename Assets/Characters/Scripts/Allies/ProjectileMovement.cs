@@ -13,6 +13,10 @@ public class ProjectileMovement : MonoBehaviour
     
     
     
+    
+    
+    
+    
     void Update()
     {
         
@@ -20,7 +24,8 @@ public class ProjectileMovement : MonoBehaviour
         {
             Vector3 direction = (target.position - transform.position).normalized;
             transform.position += direction * speed * Time.deltaTime;
-
+            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * speed);
+            transform.LookAt(target);
             // ทำลายโปรเจกไทล์เมื่อถึงเป้าหมาย
             if (Vector3.Distance(transform.position, target.position) < 0.2f)
             {
@@ -56,7 +61,7 @@ public class ProjectileMovement : MonoBehaviour
         
     }
     
-    void Explode()
+   public void Explode()
     {
         if (hitEffectPrefab != null)
         {
@@ -74,7 +79,7 @@ public class ProjectileMovement : MonoBehaviour
                 enemyHealth.TakeDamage(finalDamage);
             }
         }
-        Destroy(gameObject);
+        //Destroy(gameObject);
         
     }
 

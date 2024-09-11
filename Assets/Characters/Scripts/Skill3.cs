@@ -54,6 +54,8 @@ public class Skill3 : MonoBehaviour,ISkill
         Vector3 effectPosition = transform.position +  transform.forward * 7f;
         Quaternion effectRotation = transform.rotation;
         // แสดง effect
+        
+       // GameObject effect = Instantiate(skillEffectPrefab, effectPosition, Quaternion.identity, transform);
         GameObject effect = Instantiate(skillEffectPrefab, effectPosition, effectRotation);
         Destroy(effect, 3f); // ลบ effect หลังจาก 2 วินาที
        
@@ -82,8 +84,6 @@ public class Skill3 : MonoBehaviour,ISkill
 
         // ตรวจสอบการชนกัน
         Collider[] hitColliders = Physics.OverlapBox(hitboxCenter, hitboxSize / 2f, transform.rotation, hitboxLayer);
-       // Vector3 skillCenter = transform.position + transform.forward * skillRange;
-     //   Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * 2f, damageRadius);
         foreach (var hitCollider in hitColliders)
         {
                 EnemyHealth enemyHealth = hitCollider.GetComponent<EnemyHealth>();
