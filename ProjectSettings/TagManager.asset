@@ -9,6 +9,7 @@ TagManager:
   - PlayerWeapon
   - NextLevelPosition
   - Boss
+  - Portal
   layers:
   - Default
   - TransparentFX

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,22 +7,26 @@ public class SceneChanger : MonoBehaviour
 {
     public PlayerData PlayerData;
 
-    private PlayerStats _playerStats;
-    // Start is called before the first frame update
-    void Start()
+    private PlayerManager _playerManager;
+    public string nextLevelName;
+
+
+    private void Start()
     {
-        _playerStats = FindObjectOfType<PlayerStats>();
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (other.CompareTag("Player"))
         {
-           // PlayerStats.Instance.OnSceneChanged();
-
-           PlayerData.currentHealth = _playerStats.currentHealth;
-            SceneManager.LoadScene("TestStageBoss");
+            LoadNextLevel();
         }
+    }
+
+    private void LoadNextLevel()
+    {
+        PlayerData.currentHealth = _playerManager.currentHealth;
+        SceneManager.LoadScene(nextLevelName);
     }
 }

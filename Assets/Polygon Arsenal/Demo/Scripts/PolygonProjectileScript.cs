@@ -47,7 +47,10 @@ namespace PolygonArsenal
             if (Physics.SphereCast(transform.position, rad, dir, out hit, dist))
             {
                 transform.position = hit.point + (hit.normal * collideOffset);
+                
                _projectileMovement.Explode();
+               
+               
                 GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
 
                 if (hit.transform.tag == "Destructible") // Projectile will destroy objects tagged as Destructible

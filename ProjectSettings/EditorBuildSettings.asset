@@ -6,9 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestStage1.unity
+    path: Assets/IDLE_RPG_FOLDER/Scenes/TestStage1.unity
     guid: e3eb85ac4d7bc48458d35054d954ea2a
   - enabled: 1
-    path: Assets/Scenes/TestStageBoss.unity
+    path: Assets/IDLE_RPG_FOLDER/Scenes/TestStageBoss.unity
     guid: fce933180dccdc34c9b0a961562252db
   m_configObjects: {}
