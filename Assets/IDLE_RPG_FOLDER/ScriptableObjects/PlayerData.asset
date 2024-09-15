@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3f4b6540eef684398d568de5e1a4cf, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxHealth: 1000
-  currentHealth: 100
-  baseDamage: 10
+  maxHealth: 300
+  currentHealth: 300
+  baseDamage: 5
   weaponDamage: 5
-  criticalChance: 0.05
+  criticalChance: 0.1
   defense: 10
   armorPenetration: 0
   damageVariation: 0.2
+  regenRate: 5

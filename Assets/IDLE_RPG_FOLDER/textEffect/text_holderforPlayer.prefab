@@ -60,7 +60,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: 118896626234959630, guid: 20502e46b6e919b4cac0d128dee3dc75, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -104,15 +104,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: DMG
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 20502e46b6e919b4cac0d128dee3dc75, type: 2}
+  m_sharedMaterial: {fileID: 118896626234959630, guid: 20502e46b6e919b4cac0d128dee3dc75, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4280746239
-  m_fontColor: {r: 1, g: 0, b: 0.1525631, a: 1}
+    rgba: 3841982463
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -184,7 +184,7 @@ Animator:
   m_GameObject: {fileID: 7645294766076009391}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ef1020986d7296241b3327a1dbb3c4a2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 7b70ec99b9e2e73498713bddc8bba3ac, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -229,7 +229,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7632897690237548536}
   m_Layer: 0
-  m_Name: text_holderPlayer
+  m_Name: text_holderforPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

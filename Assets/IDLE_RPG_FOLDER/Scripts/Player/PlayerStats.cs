@@ -11,8 +11,10 @@ public class PlayerManager : MonoBehaviour
     public float currentHealth;
     private DamageDisplay _damageDisplay;
     public Animator animator;
-  
-
+    public GameObject regenEffect;
+    public GameObject hitVFX;
+    public Transform spawnVFXPosition;
+    public Transform spawnRegenPosition;
     public bool isCritical;
     public CharacterHitEffect hitEffect;
     public string Stagename;
@@ -20,15 +22,40 @@ public class PlayerManager : MonoBehaviour
     private AIController _aiController;
     private AllyRangedCombat _allyRangedCombat;
     public GameObject gameOverUI;
+    //public float regenRate = 1f;
+    
+    public float regenInterval = 5f;
+    private AudioManager _audioManager;
     void Start()
     {
+        StartCoroutine(RegenerateHP());
         _allyRangedCombat = FindObjectOfType<AllyRangedCombat>();
         _playerController = FindObjectOfType<PlayerController>();
         //hitEffect = GetComponent<CharacterHitEffect>();
        currentHealth = PlayerData.currentHealth;
         _damageDisplay = FindObjectOfType<DamageDisplay>();
         _aiController = FindObjectOfType<AIController>();
+        _audioManager = FindObjectOfType<AudioManager>();
     }
+    private IEnumerator RegenerateHP()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(regenInterval);
+
+            if (currentHealth < PlayerData.maxHealth)
+            {
+                Quaternion rotation = Quaternion.Euler(-90f, 0, 0f);
+                GameObject regenEfx = Instantiate(regenEffect, spawnRegenPosition.position,rotation );
+                Destroy(regenEfx, 1f);
+                
+                currentHealth += PlayerData.regenRate;
+                currentHealth = Mathf.Min(currentHealth, PlayerData.maxHealth);
+                Debug.Log("Current HP: " + currentHealth);
+            }
+        }
+    }
+    
     public float CalculatePlayerAttackDamage(float skillDamageMultiplier = 1f)
     {
         // Start with base damage
@@ -67,8 +94,11 @@ public class PlayerManager : MonoBehaviour
 
         Debug.Log($"Player took {finalDamage} damage. Current health: {currentHealth}");
         
-       
+        _audioManager.PlayHitSound();
             _damageDisplay.DisplayDamage(finalDamage);
+           Quaternion rotation = Quaternion.Euler(-90f, 0, 0f);
+            GameObject effect = Instantiate(hitVFX, spawnVFXPosition.position,rotation );
+            Destroy(effect, 1f);
             
         if (currentHealth <= 0)
         {

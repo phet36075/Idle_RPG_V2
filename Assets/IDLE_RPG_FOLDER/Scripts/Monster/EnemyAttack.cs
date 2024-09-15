@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using Random = UnityEngine.Random;
 public class EnemyAttack : MonoBehaviour
 {
     public float attackRange = 1f;
@@ -15,8 +15,10 @@ public class EnemyAttack : MonoBehaviour
     private NavMeshAgent agent;
     public float chaseRange = 5f;
     private Transform player;
-
+    private bool isAttacking = false;
     public float rotationSpeed = 5f;
+    public float damageVariation = 0.2f;
+    private EnemyHealth _enemyData;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class EnemyAttack : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        _enemyData = FindObjectOfType<EnemyHealth>();
     }
 
     // Update is called once per frame
@@ -69,10 +72,12 @@ public class EnemyAttack : MonoBehaviour
     public void EnableCollision()
     {
         enemySwordCollider.enabled = true;
+        isAttacking = true;
     }
     public void DisableCollision()
     {
         enemySwordCollider.enabled = false;
+        isAttacking = false;
     }
     
 
@@ -108,6 +113,27 @@ public class EnemyAttack : MonoBehaviour
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         //Debug.Log("Target Rotation: " + lookRotation.eulerAngles);  // ตรวจสอบการหมุนที่ควรจะเป็น
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
+    }
+    void OnTriggerEnter(Collider other)
+    {
+        // ตรวจสอบว่าชนกับผู้เล่น
+        if (isAttacking && other.CompareTag("Player"))
+        {
+            // เข้าถึงสคริปต์ PlayerHealth ของผู้เล่น
+            PlayerManager playerHealth = other.GetComponent<PlayerManager>();
+            int finalDamage = CalculateDamage();
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(finalDamage,_enemyData.EnemyData.armorPenetration);  // ส่งดาเมจให้กับผู้เล่น
+            }
+        }
+    }
+    int CalculateDamage()
+    {
+        float randomFactor = Random.Range(1f - damageVariation, 1f + damageVariation);
+        int finalDamage = Mathf.RoundToInt(_enemyData.EnemyData.BaseAttack * randomFactor);
+        return finalDamage;
+        
     }
     
 }

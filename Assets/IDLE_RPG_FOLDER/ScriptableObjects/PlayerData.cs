@@ -16,6 +16,7 @@ public class PlayerData : ScriptableObject
     public float armorPenetration = 0f;
    // public bool isCritical;
     public float damageVariation = 0.2f; // 20% variation
+    public float regenRate = 1f;
 
     private void OnEnable()
     {

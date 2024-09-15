@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 
 public class EnemyWeapon : MonoBehaviour
 {
-    public float baseDamage = 10; // ดาเมจของดาบ
     public float damageVariation = 0.2f;
     private EnemyHealth _enemyData;
     void OnTriggerEnter(Collider other)
@@ -22,13 +21,12 @@ public class EnemyWeapon : MonoBehaviour
                 playerHealth.TakeDamage(finalDamage,_enemyData.EnemyData.armorPenetration);  // ส่งดาเมจให้กับผู้เล่น
             }
         }
-        
     }
     
     int CalculateDamage()
     {
         float randomFactor = Random.Range(1f - damageVariation, 1f + damageVariation);
-        int finalDamage = Mathf.RoundToInt(baseDamage * randomFactor);
+        int finalDamage = Mathf.RoundToInt(_enemyData.EnemyData.BaseAttack * randomFactor);
         return finalDamage;
         
     }

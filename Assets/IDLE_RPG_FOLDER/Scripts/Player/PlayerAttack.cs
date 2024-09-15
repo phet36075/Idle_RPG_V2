@@ -7,7 +7,7 @@ using UnityEngine.VFX;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
-    public float attackDamage = 10f;
+  
     public Collider weaponCollider;
     
     public AllyRangedCombat rangedAllies;  // เพิ่มอาร์เรย์ของพวกพ้องที่โจมตีระยะไกล
@@ -19,11 +19,12 @@ public class PlayerAttack : MonoBehaviour
     private Transform vfxPos;
     public GameObject attackVFX;
     public Trail _Trail;
-    
+
     
     void Start()
     {
         weaponCollider.enabled = false;
+       
     }
 
     void Update()
@@ -65,6 +66,7 @@ public class PlayerAttack : MonoBehaviour
         attackVFX.gameObject.SetActive(true);
         _Trail.enabled = true;
         float effectDuration = 0.2f;
+       
         Invoke("StopEffect", effectDuration);
     }
     
@@ -96,7 +98,7 @@ public class PlayerAttack : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy") || other.CompareTag("Boss"))
+        if (isAttacking && other.CompareTag("Enemy"))
         {
             EnemyHealth enemyHealth = other.GetComponent<EnemyHealth>();
             

@@ -12,7 +12,7 @@ public class EnemyHealth : MonoBehaviour
  /*   public float maxhealth = 50f;
     public string enemyName = "Enemy";
     public float defense = 5f;*/
-  
+ 
   
     public Slider healthBar;
     public bool isDead = false;
@@ -34,6 +34,7 @@ public class EnemyHealth : MonoBehaviour
    public CharacterHitEffect CharacterHitEffect;
    private PlayerManager _playerManager;
    private DamageDisplay _damageDisplay;
+   private AudioManager _audioManager;
    void Start()
    {
        currentHealth = EnemyData.maxhealth;
@@ -42,6 +43,7 @@ public class EnemyHealth : MonoBehaviour
        spawner = FindObjectOfType<EnemySpawner>();
        _playerManager = FindObjectOfType<PlayerManager>();
        _damageDisplay = FindObjectOfType<DamageDisplay>();
+       _audioManager = FindObjectOfType<AudioManager>();
    }
 
    public void TakeDamage(float incomingDamage)
@@ -102,17 +104,21 @@ public class EnemyHealth : MonoBehaviour
            Invoke("ResetHurt", 0.5f);
        }
            
+       
+       
        GameObject effect = Instantiate(hitVFX, spawnVFXPosition.position, spawnVFXPosition.rotation);
        Destroy(effect, 1f);
-            UpdateHealthBar();
+       UpdateHealthBar();
 
             if (_playerManager.isCritical == true)
             {
                 _damageDisplay.DisplayDamageCritical(finalDamage);
                 _playerManager.isCritical = false;
+                _audioManager.PlayHitCritSound();
             }
             else
             {
+                _audioManager.PlayHitSound();
                 _damageDisplay.DisplayDamage(finalDamage);
             }
             
@@ -183,13 +189,6 @@ public class EnemyHealth : MonoBehaviour
     }
     
     
-    
-    
-    
-    
-    
-    
-    
     public void ResetHurt()
     {
         animator.SetBool("isHurt", false);
@@ -222,7 +221,6 @@ public class EnemyHealth : MonoBehaviour
     
     /*void Die()
     {
-    
         isDead = true;
         animator.SetTrigger("Die");
         GetComponent<NavMeshAgent>().enabled = false;
@@ -253,6 +251,10 @@ public class EnemyHealth : MonoBehaviour
 
         healthBar.value = currentHealth;
     }
+    
+    
+    
+    
     
     
     void Update()

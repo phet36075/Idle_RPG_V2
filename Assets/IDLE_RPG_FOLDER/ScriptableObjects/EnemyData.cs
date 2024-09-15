@@ -9,6 +9,6 @@ public class EnemyData : ScriptableObject
     public float defense = 5f;
     public float armorPenetration = 5f;
     public bool isCritical = false;
-
+    public float BaseAttack = 10f;
 
 }

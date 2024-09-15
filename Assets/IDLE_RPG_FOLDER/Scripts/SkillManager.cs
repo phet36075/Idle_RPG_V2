@@ -37,7 +37,7 @@ public class SkillManager : MonoBehaviour
         }
     }
 
-    private void UseSkill(int index)
+    public void UseSkill(int index)
     {
         if (index >= 0 && index < skills.Count)
         {
