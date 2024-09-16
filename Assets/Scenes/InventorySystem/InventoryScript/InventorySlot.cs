@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
-using UnityEditorInternal.Profiling.Memory.Experimental;
+
 
 public class InventorySlot : MonoBehaviour, IDropHandler, IDragHandler,IBeginDragHandler,IEndDragHandler, IPointerClickHandler
 {
