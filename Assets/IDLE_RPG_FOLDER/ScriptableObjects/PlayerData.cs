@@ -17,20 +17,26 @@ public class PlayerData : ScriptableObject
    // public bool isCritical;
     public float damageVariation = 0.2f; // 20% variation
     public float regenRate = 1f;
-
+    public int stage = 1;
+    // ชั่วคราว
+    public int upgradeCost = 100;
+    public int level = 1;
     private void OnEnable()
     {
         currentHealth = maxHealth;
+        ResetToDefault();
     }
     
     public void ResetToDefault()
     {
-        maxHealth = 100f;
+        maxHealth = 300f;
         baseDamage = 10f;
-        weaponDamage = 10f;
+        weaponDamage = 5f;
         criticalChance = 0.05f;
         defense = 5f;
         armorPenetration = 0;
-        
+        stage = 1;
+        level = 1;
+        upgradeCost = 100;
     }
 }

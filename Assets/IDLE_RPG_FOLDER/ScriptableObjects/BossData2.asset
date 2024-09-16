@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8989e9eda936ad4498e9a95b08f51dd7, type: 3}
   m_Name: BossData2
   m_EditorClassIdentifier: 
-  maxhealth: 500
+  maxhealth: 0
+  DefaultMaxHealth: 300
   enemyName: Enemy
   defense: 30
   armorPenetration: 0
   isCritical: 0
-  BaseAttack: 20
+  BaseAttack: 0
+  DefaultBaseAttack: 20
+  moneyDrop: 0
+  DefaultmoneyDrop: 300

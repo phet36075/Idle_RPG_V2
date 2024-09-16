@@ -108,6 +108,19 @@ public class PlayerManager : MonoBehaviour
         
     }
 
+    public void Heal(float amount)
+    {
+        currentHealth +=amount;
+        if (currentHealth >= PlayerData.maxHealth)
+        {
+            currentHealth = PlayerData.maxHealth;
+        }
+    }
+
+    public void ChangeWeapon(float weaponDmg)
+    {
+        PlayerData.weaponDamage = weaponDmg;
+    }
     void Die()
     {
        // currentHealth = PlayerData.maxHealth;

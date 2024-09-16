@@ -42,23 +42,27 @@ public class PlayerAttack : MonoBehaviour
     }
     public void Attack()
     {
-        lastAttackTime = Time.time;
-        isAttacking = true;
-        comboStep++;
-        rangedAllies.CallAlliesToAttack();
-        if (comboStep == 1)
+        if (!isAttacking)
         {
-            animator.SetTrigger("Attack1");
+            lastAttackTime = Time.time;
+            isAttacking = true;
+            comboStep++;
+            rangedAllies.CallAlliesToAttack();
+            if (comboStep == 1)
+            {
+                animator.SetTrigger("Attack1");
+            }
+            else if (comboStep == 2)
+            {
+                animator.SetTrigger("Attack2");
+            }
+            else if (comboStep == 3)    
+            {
+                animator.SetTrigger("Attack3");
+                comboStep = 0;
+            }
         }
-        else if (comboStep == 2)
-        {
-            animator.SetTrigger("Attack2");
-        }
-        else if (comboStep == 3)    
-        {
-            animator.SetTrigger("Attack3");
-            comboStep = 0;
-        }
+       
     }
     
     public void PerformAttack()

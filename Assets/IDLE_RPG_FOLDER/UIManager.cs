@@ -28,8 +28,8 @@ public class UIManager : MonoBehaviour
     {
         _txtMoney.text = _currencyManager.CurrentMoney.ToString();
         _txtPlayerHealth.text = _PlayerManager.currentHealth.ToString("0");
-        /* _txtStage.text = _StageManager.currentStagetxt.ToString();
-         _txtEnemiesDefeated.text = _EnemySpawner.enemiesDefeated.ToString();
+        _txtStage.text = _PlayerManager.PlayerData.stage.ToString();
+        /* _txtEnemiesDefeated.text = _EnemySpawner.enemiesDefeated.ToString();
          _txtTotalToDefeated.text = _EnemySpawner.totalEnemiesToDefeat.ToString();*/
     }
 }

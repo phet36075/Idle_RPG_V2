@@ -141,7 +141,7 @@ public class EnemyHealth : MonoBehaviour
         }
         
         
-        CurrencyManager.Instance.AddMoney(100);
+        CurrencyManager.Instance.AddMoney(EnemyData.moneyDrop);
         isDead = true;
         animator.SetTrigger("Die");
         GetComponent<NavMeshAgent>().enabled = false;
