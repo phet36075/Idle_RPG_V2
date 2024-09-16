@@ -686,11 +686,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 2
   attackCooldown: 2
-  attackDamage: 10
   enemySwordCollider: {fileID: 7884874271953235674}
   animator: {fileID: 6072076048926620861}
   chaseRange: 4
   rotationSpeed: 5
+  damageVariation: 0.2
 --- !u!114 &1241214694632399121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -703,15 +703,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3cfe2111aee4c43a330e8f4abfa05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxhealth: 100
-  enemyName: Rabbit
+  EnemyData: {fileID: 0}
+  spawnVFXPosition: {fileID: 0}
   currentHealth: 0
   healthBar: {fileID: 7172195641874481342}
   isDead: 0
+  hitVFX: {fileID: 0}
   animator: {fileID: 6072076048926620861}
   enemyCollider: {fileID: 8809294430291930545}
   staggerDuration: 0.5
   cooldownStagger: 5
+  CharacterHitEffect: {fileID: 0}
 --- !u!114 &6712980559664603852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,7 +727,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageTextPrefab: {fileID: 8058489753668129861, guid: 9db87d97486b99c44824f5688f7c2f37, type: 3}
-  textLocation: {fileID: 8106477255246790129}
+  damageTextPrefabCritical: {fileID: 0}
+  textLocation: {fileID: 5317528683180149280}
+  randomOffsetRange: {x: 0.5, y: 0.5, z: 0.5}
   textToDisplay: 
   vector: {x: 0, y: 0, z: 0}
 --- !u!114 &6232161165099676152
@@ -3762,7 +3766,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 694e526f8ef89de4593191eaa8b9c78c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damageVariation: 0.2
 --- !u!1 &8844940450808012973
 GameObject:
   m_ObjectHideFlags: 0

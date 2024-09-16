@@ -48,11 +48,13 @@ namespace PolygonArsenal
             {
                 transform.position = hit.point + (hit.normal * collideOffset);
                 
-               _projectileMovement.Explode();
+             
                
                
                 GameObject impactP = Instantiate(impactParticle, transform.position, Quaternion.FromToRotation(Vector3.up, hit.normal)) as GameObject;
-
+                
+                 //_projectileMovement.Explode();
+                
                 if (hit.transform.tag == "Destructible") // Projectile will destroy objects tagged as Destructible
                 {
                     Destroy(hit.transform.gameObject);
@@ -66,6 +68,8 @@ namespace PolygonArsenal
                 }
                 Destroy(projectileParticle, 3f);
                 Destroy(impactP, 5.0f);
+                Debug.Log("Explode");
+                 _projectileMovement.Explode();
                 Destroy(gameObject);
 
                 ParticleSystem[] trails = GetComponentsInChildren<ParticleSystem>();
@@ -84,6 +88,10 @@ namespace PolygonArsenal
             }
         }
 
+        public void DoExplode()
+        {
+            
+        }
         //private bool hasCollided = false;
 
         /*void OnCollisionEnter(Collision hit)

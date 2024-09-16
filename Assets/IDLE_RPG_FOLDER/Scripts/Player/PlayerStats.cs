@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerData PlayerData;
    
     public float currentHealth;
-    private DamageDisplay _damageDisplay;
+    public DamageDisplay _damageDisplay;
     public Animator animator;
     public GameObject regenEffect;
     public GameObject hitVFX;
@@ -25,7 +25,7 @@ public class PlayerManager : MonoBehaviour
     //public float regenRate = 1f;
     
     public float regenInterval = 5f;
-    private AudioManager _audioManager;
+    public AudioManager _audioManager;
     void Start()
     {
         StartCoroutine(RegenerateHP());
@@ -33,9 +33,9 @@ public class PlayerManager : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         //hitEffect = GetComponent<CharacterHitEffect>();
        currentHealth = PlayerData.currentHealth;
-        _damageDisplay = FindObjectOfType<DamageDisplay>();
+      //  _damageDisplay = FindObjectOfType<DamageDisplay>();
         _aiController = FindObjectOfType<AIController>();
-        _audioManager = FindObjectOfType<AudioManager>();
+       // _audioManager = FindObjectOfType<AudioManager>();
     }
     private IEnumerator RegenerateHP()
     {

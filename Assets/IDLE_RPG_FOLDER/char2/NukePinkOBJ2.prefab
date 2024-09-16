@@ -70,6 +70,7 @@ MonoBehaviour:
   explosionRadius: 3
   hitEffectPrefab: {fileID: 0}
   damageVariation: 0.2
+  distanceEnemy: 1
 --- !u!54 &7555187740983844692
 Rigidbody:
   m_ObjectHideFlags: 0

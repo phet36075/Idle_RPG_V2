@@ -10,7 +10,7 @@ public class ProjectileMovement : MonoBehaviour
     private Transform target;
     public GameObject hitEffectPrefab;
     public float damageVariation = 0.2f;  // กำหนดเปอร์เซ็นต์การแกว่งของดาเมจ (เช่น 0.2 = ±20%)
-    
+    public float distanceEnemy = 0.2f;
     
     
     void Update()
@@ -25,7 +25,7 @@ public class ProjectileMovement : MonoBehaviour
             transform.LookAt(target);
             gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.forward * speed);
             // ทำลายโปรเจกไทล์เมื่อถึงเป้าหมาย
-            if (Vector3.Distance(transform.position, target.position) < 0.2f)
+            if (Vector3.Distance(transform.position, target.position) < distanceEnemy)
             {
                 // HitTarget();
               //  Explode();
@@ -61,23 +61,29 @@ public class ProjectileMovement : MonoBehaviour
     
    public void Explode()
     {
-        if (hitEffectPrefab != null)
+       /* if (hitEffectPrefab != null)
         {
             GameObject effect = Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
             //Destroy(effect, 1f); // ลบ effect หลังจาก 2 วินาที
             
-        }
+        }*/
         int finalDamage = CalculateDamage();
         Collider[] colliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider nearbyObject in colliders)
         {
-            EnemyHealth enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
-            if (enemyHealth != null)
+            if (nearbyObject.CompareTag("Enemy"))
             {
-                enemyHealth.TakeDamage(finalDamage);
+                EnemyHealth enemyHealth = nearbyObject.GetComponent<EnemyHealth>();
+                if (enemyHealth != null)
+                {
+                    enemyHealth.TakeDamage(finalDamage);
+                }
             }
+           
         }
-        //Destroy(gameObject);
+        
+        Debug.Log("Destroy Projectile");
+        //tDestroy(gameObject);
         
     }
 

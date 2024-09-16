@@ -93,7 +93,7 @@ public class Skill3 : MonoBehaviour,ISkill
                 if (enemyHealth != null)
                 {
                     PlayerManager playerStats = GetComponent<PlayerManager>();
-                    float enemyDefense = 10f;
+                   
                 
                     //Skill Damage
                     float skillDamage = playerStats.CalculatePlayerAttackDamage(skill3DmgLongSword);

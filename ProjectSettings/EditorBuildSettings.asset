@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/IDLE_RPG_FOLDER/Scenes/TestStage1.unity
     guid: e3eb85ac4d7bc48458d35054d954ea2a
   - enabled: 1
-    path: Assets/IDLE_RPG_FOLDER/Scenes/TestStageBoss.unity
-    guid: fce933180dccdc34c9b0a961562252db
+    path: Assets/IDLE_RPG_FOLDER/Scenes/TestStageBoss2.unity
+    guid: 6a937e4e8dd961d46b14200869c8c656
   m_configObjects: {}

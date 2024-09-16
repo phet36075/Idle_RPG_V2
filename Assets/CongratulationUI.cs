@@ -10,7 +10,7 @@ public class CongratulationUI : MonoBehaviour
     public TextMeshProUGUI timeText;
 
     public Transform NextDoorLocation;
-
+    public GameObject PortalEffect;
     //public Animator playerAnimator;
    private AIController _aiController;
 
@@ -37,7 +37,7 @@ public class CongratulationUI : MonoBehaviour
 
     public void GoNextStage()
     {
-        
+        PortalEffect.gameObject.SetActive(true);
        _aiController.SetTarget(NextDoorLocation);
         gameObject.SetActive(false);
        

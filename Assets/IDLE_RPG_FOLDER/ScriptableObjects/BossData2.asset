@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8989e9eda936ad4498e9a95b08f51dd7, type: 3}
-  m_Name: EnemyData
+  m_Name: BossData2
   m_EditorClassIdentifier: 
-  maxhealth: 100
+  maxhealth: 500
   enemyName: Enemy
-  defense: 10
+  defense: 30
   armorPenetration: 0
   isCritical: 0
-  BaseAttack: 10
+  BaseAttack: 20

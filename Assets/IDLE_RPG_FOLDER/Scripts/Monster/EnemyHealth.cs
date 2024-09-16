@@ -5,15 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 public class EnemyHealth : MonoBehaviour
 {
+    public bool IsthisBoss = false;
+    public GameObject CongratulationUI;
     [Header("-----------Health----------")]
     public EnemyData EnemyData;
     public Transform spawnVFXPosition;
     public float currentHealth;
- /*   public float maxhealth = 50f;
-    public string enemyName = "Enemy";
-    public float defense = 5f;*/
- 
-  
     public Slider healthBar;
     public bool isDead = false;
 
@@ -33,8 +30,8 @@ public class EnemyHealth : MonoBehaviour
    private bool isHurt;
    public CharacterHitEffect CharacterHitEffect;
    private PlayerManager _playerManager;
-   private DamageDisplay _damageDisplay;
-   private AudioManager _audioManager;
+   public DamageDisplay _damageDisplay;
+   public AudioManager _audioManager;
    void Start()
    {
        currentHealth = EnemyData.maxhealth;
@@ -42,8 +39,8 @@ public class EnemyHealth : MonoBehaviour
        healthBar.value = currentHealth;
        spawner = FindObjectOfType<EnemySpawner>();
        _playerManager = FindObjectOfType<PlayerManager>();
-       _damageDisplay = FindObjectOfType<DamageDisplay>();
-       _audioManager = FindObjectOfType<AudioManager>();
+     //  _damageDisplay = FindObjectOfType<DamageDisplay>();
+     //  _audioManager = FindObjectOfType<AudioManager>();
    }
 
    public void TakeDamage(float incomingDamage)
@@ -135,33 +132,15 @@ public class EnemyHealth : MonoBehaviour
             
             
     }
-    public void TakeDamage(DamageInfo damageInfo)
-    {
-        float finalDamage = CalculateDamage(damageInfo);
-        currentHealth -= finalDamage;
-
-        // แสดง effect ตามประเภทดาเมจ
-        ShowDamageEffect(damageInfo);
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    private float CalculateDamage(DamageInfo damageInfo)
-    {
-        // คำนวณดาเมจตามประเภท, ความต้านทาน, คริติคอล ฯลฯ
-        return damageInfo.amount;
-    }
-
-    private void ShowDamageEffect(DamageInfo damageInfo)
-    {
-        // แสดง particle effect หรือเสียงตามประเภทดาเมจ
-    }
-
+   
     private void Die()
     {
+        if (IsthisBoss)
+        {
+            CongratulationUI.gameObject.SetActive(true);
+        }
+        
+        
         CurrencyManager.Instance.AddMoney(100);
         isDead = true;
         animator.SetTrigger("Die");
@@ -208,28 +187,14 @@ public class EnemyHealth : MonoBehaviour
         }
         
         // หยุดการเคลื่อนไหวของศัตรูชั่วคราว
-        GetComponent<EnemyAttack>().enabled = false;  // ปิดการเคลื่อนไหว
+//        GetComponent<EnemyAttack>().enabled = false;  // ปิดการเคลื่อนไหว
         Invoke("RecoverFromStagger", staggerDuration);  // กำหนดเวลาหยุดชะงัก
         
     }
     void RecoverFromStagger()
     {
-    
-        GetComponent<EnemyAttack>().enabled = true;  // เปิดการเคลื่อนไหวกลับมา
+//        GetComponent<EnemyAttack>().enabled = true;  // เปิดการเคลื่อนไหวกลับมา
     }
-    
-    
-    /*void Die()
-    {
-        isDead = true;
-        animator.SetTrigger("Die");
-        GetComponent<NavMeshAgent>().enabled = false;
-        Destroy(gameObject,3f);
-        enemyCollider.enabled = false;
-        animator.SetBool("IsWalking",false);
-        animator.SetBool("IsAttacking",false);
-        currentHealth = 0;
-    }*/
     
     void UpdateHealthBar()
     {
@@ -251,9 +216,6 @@ public class EnemyHealth : MonoBehaviour
 
         healthBar.value = currentHealth;
     }
-    
-    
-    
     
     
     

@@ -7,11 +7,11 @@ using Random = UnityEngine.Random;
 
 public class BossBehavior : MonoBehaviour
 {
-    public BossData _BossData;
-    
+
+    public EnemyData _BossData;
+    private EnemyHealth _enemyHealth;
     public Animator animator;
-    public float maxHealth = 100f;
-    public float currentHealth;
+   
     
     public float attackRange = 2f;
     public float attackDamage = 10f;
@@ -46,7 +46,7 @@ public class BossBehavior : MonoBehaviour
         _bossSkill1 = FindObjectOfType<bossSkill1>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        currentHealth = maxHealth;
+        _enemyHealth = FindObjectOfType<EnemyHealth>();
         _BossSkill2 = FindObjectOfType<BossSkill2>();
     }
 
@@ -88,6 +88,8 @@ public class BossBehavior : MonoBehaviour
         }
         
         
+        
+        
     }
 
     public void animPunch()
@@ -97,7 +99,7 @@ public class BossBehavior : MonoBehaviour
         {
             PlayerManager playerManager = player.GetComponent<PlayerManager>();
             
-            playerManager.TakeDamage(10,_BossData.armorPenetration);
+            playerManager.TakeDamage(_BossData.BaseAttack,_BossData.armorPenetration);
         }
 
     }
@@ -221,14 +223,7 @@ public class BossBehavior : MonoBehaviour
         IsUsingSkill = false;
 
     }
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
+    
 
     void Die()
     {

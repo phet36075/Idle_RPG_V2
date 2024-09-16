@@ -17,7 +17,7 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesSpawned = 0;  // จำนวนศัตรูที่เกิดแล้ว
     private int enemiesDefeated = 0;  // จำนวนศัตรูที่ถูกกำจัดแล้ว
 
-    public GameObject PortalEffect;
+ 
     public GameObject WinUI;
     void Start()
     {
@@ -70,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemiesDefeated >= maxEnemies)
         {
             Debug.Log("All enemies defeated!");
-            PortalEffect.gameObject.SetActive(true);
+           
             WinUI.gameObject.SetActive(true);
             
             // ทำอะไรก็ตามที่คุณต้องการเมื่อกำจัดศัตรูครบจำนวน เช่น แสดงข้อความชนะ หรือโหลดด่านต่อไป

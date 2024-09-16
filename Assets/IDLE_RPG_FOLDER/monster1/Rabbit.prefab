@@ -620,14 +620,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.33682838
-  m_Height: 1.3496355
+  m_Radius: 0.49
+  m_Height: 1.64
   m_Direction: 1
-  m_Center: {x: 0.028129399, y: 0.71185213, z: -0.018612027}
+  m_Center: {x: 0.028129399, y: 0.67, z: 0.01}
 --- !u!195 &2419994355897554128
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -708,6 +708,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3cfe2111aee4c43a330e8f4abfa05e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsthisBoss: 0
+  CongratulationUI: {fileID: 0}
   EnemyData: {fileID: 11400000, guid: 83bb35b548d1bda4a89d3925dbaa19f9, type: 2}
   spawnVFXPosition: {fileID: 7889860477523577515}
   currentHealth: 0
@@ -719,6 +721,8 @@ MonoBehaviour:
   staggerDuration: 0.5
   cooldownStagger: 5
   CharacterHitEffect: {fileID: 1277579419201185817}
+  _damageDisplay: {fileID: 6712980559664603852}
+  _audioManager: {fileID: 1312741056670634256}
 --- !u!114 &6712980559664603852
 MonoBehaviour:
   m_ObjectHideFlags: 0
