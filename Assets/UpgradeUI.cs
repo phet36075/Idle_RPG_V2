@@ -37,7 +37,8 @@ public class UpgradeUI : MonoBehaviour
             _PlayerData.level++;
             _currencyManager.SpendMoney(_PlayerData.upgradeCost);
             _PlayerData.weaponDamage += 5;
-            _PlayerData.upgradeCost = (int)Math.Round(100 * ( _PlayerData.level * 1.5f));
+           // _PlayerData.upgradeCost = (int)Math.Round(100 * ( _PlayerData.level * 1.5f));
+            _PlayerData.upgradeCost = (int)Math.Round(100*( _PlayerData.level * 1.5f));
         }
     
         
