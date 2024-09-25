@@ -26,6 +26,8 @@ public class PlayerManager : MonoBehaviour
     
     public float regenInterval = 5f;
     public AudioManager _audioManager;
+
+    public bool IsPlayerDie = false;
     void Start()
     {
         StartCoroutine(RegenerateHP());
@@ -123,6 +125,7 @@ public class PlayerManager : MonoBehaviour
     }
     void Die()
     {
+        IsPlayerDie = true;
        // currentHealth = PlayerData.maxHealth;
        animator.SetTrigger("Die");
        _allyRangedCombat.Die();

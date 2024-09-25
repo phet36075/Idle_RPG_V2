@@ -15,6 +15,7 @@ public class EnemyAttack : MonoBehaviour
     private NavMeshAgent agent;
     public float chaseRange = 5f;
     private Transform player;
+    private PlayerManager _playerManager;
     private bool isAttacking = false;
     public float rotationSpeed = 5f;
     public float damageVariation = 0.2f;
@@ -24,6 +25,7 @@ public class EnemyAttack : MonoBehaviour
     {
         DisableCollision();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        _playerManager = FindObjectOfType<PlayerManager>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         _enemyData = FindObjectOfType<EnemyHealth>();
@@ -50,12 +52,16 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                GetComponent<EnemyRoaming>().enabled = false;
-                agent.SetDestination(transform.position);
-               // agent.isStopped = true;
-                animator.SetBool("IsWalking",false);
-                RotateTowardsTarget();
-                AttackPlayer();
+                if (_playerManager.IsPlayerDie != true)
+                {
+                    GetComponent<EnemyRoaming>().enabled = false;
+                    agent.SetDestination(transform.position);
+                    // agent.isStopped = true;
+                    animator.SetBool("IsWalking",false);
+                    RotateTowardsTarget();
+                    AttackPlayer();
+                }
+               
             }
         }
         else

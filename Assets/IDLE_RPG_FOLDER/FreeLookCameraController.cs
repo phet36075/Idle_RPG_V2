@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,21 +15,31 @@ public class FreeLookCameraController : MonoBehaviour
     public float maxZoom = 50f;
     public float lookAtCameraDistance = 3f; // ระยะที่ตัวละครจะหันหน้ามาทางกล้อง
     
-    
+ 
+    void Start()
+    {
+      
+
+    }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetMouseButton(1)) // คลิกขวาเพื่อหมุนกล้อง
         {
+       
             freeLookCamera.m_XAxis.m_InputAxisName = mouseXInputName;
             freeLookCamera.m_YAxis.m_InputAxisName = mouseYInputName;
         }
         else
         {
+            // เพิ่มส่วนนี้เพื่อหยุดการหมุนทันทีเมื่อปล่อยเมาส์
+            freeLookCamera.m_XAxis.m_InputAxisValue = 0f;
+            freeLookCamera.m_YAxis.m_InputAxisValue = 0f;
+            
             freeLookCamera.m_XAxis.m_InputAxisName = "";
             freeLookCamera.m_YAxis.m_InputAxisName = "";
+        
         }
-
         // ซูมกล้องด้วย Scroll Wheel
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         freeLookCamera.m_Lens.FieldOfView -= scrollInput * zoomSpeed;
@@ -49,3 +60,5 @@ public class FreeLookCameraController : MonoBehaviour
     }
     
 }
+    
+
