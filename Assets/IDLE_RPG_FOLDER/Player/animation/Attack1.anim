@@ -52732,14 +52732,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.46666667
-    functionName: EnableWeaponCollider
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.56666666
+  - time: 0.7
     functionName: PerformAttack
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -52748,13 +52741,6 @@ AnimationClip:
     messageOptions: 0
   - time: 0.8333333
     functionName: EndAttack
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 0.9
-    functionName: DisableWeaponCollider
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

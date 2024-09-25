@@ -7,8 +7,6 @@ using UnityEngine.VFX;
 public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
-  
-    public Collider weaponCollider;
     
     public AllyRangedCombat rangedAllies;  // เพิ่มอาร์เรย์ของพวกพ้องที่โจมตีระยะไกล
     
@@ -19,11 +17,21 @@ public class PlayerAttack : MonoBehaviour
     private Transform vfxPos;
     public GameObject attackVFX;
     public Trail _Trail;
-
     
+    public float detectionRadius = 5f; // รัศมีในการตรวจจับศัตรู
+    public float moveSpeed = 5f; // ความเร็วในการเคลื่อนที่
+    public float attackRange = 2f; // ระยะโจมตี
+    public float attackRadius = 1f; // รัศมีการโจมตี
+    private Transform nearestEnemy; // เก็บ Transform ของศัตรูที่ใกล้ที่สุด
+    private bool isMovingToEnemy = false; // เพิ่มตัวแปรเพื่อตรวจสอบว่ากำลังเคลื่อนที่หาศัตรูหรือไม่
+    
+    private float currentSpeed = 0f; // เพิ่มตัวแปรเก็บความเร็วปัจจุบัน
+    
+    public Transform attackPoint; // จุดศูนย์กลางของการโจมตี
+    public LayerMask enemyLayers; // Layer ของศัตรู
     void Start()
     {
-        weaponCollider.enabled = false;
+        
        
     }
 
@@ -33,12 +41,25 @@ public class PlayerAttack : MonoBehaviour
         {
             comboStep = 0;
             isAttacking = false;
+            isMovingToEnemy = false;
         }
         
         if (Input.GetKeyDown(KeyCode.F) && !isAttacking)
         {
             Attack();
         }
+
+        if (isMovingToEnemy && nearestEnemy != null)
+        {
+            MoveTowardsEnemy();
+        }
+        else
+        {
+            StopMoving();
+        }
+
+        // อัพเดท animator ด้วยค่า Speed ปัจจุบัน
+       
     }
     public void Attack()
     {
@@ -48,41 +69,140 @@ public class PlayerAttack : MonoBehaviour
             isAttacking = true;
             comboStep++;
             rangedAllies.CallAlliesToAttack();
-            if (comboStep == 1)
+
+            FindNearestEnemy();
+
+            if (nearestEnemy == null)
             {
-                animator.SetTrigger("Attack1");
+                PerformAttackAnimation();
             }
-            else if (comboStep == 2)
+            else
             {
-                animator.SetTrigger("Attack2");
-            }
-            else if (comboStep == 3)    
-            {
-                animator.SetTrigger("Attack3");
-                comboStep = 0;
+                float distanceToEnemy = Vector3.Distance(transform.position, nearestEnemy.position);
+                if (distanceToEnemy <= attackRange)
+                {
+                    PerformAttackAnimation();
+                }
+                else
+                {
+                    isMovingToEnemy = true;
+                    MoveTowardsEnemy();
+                }
             }
         }
-       
+    }
+    private void FindNearestEnemy()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        float closestDistance = Mathf.Infinity;
+        nearestEnemy = null;
+
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider.CompareTag("Enemy"))
+            {
+                float distance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    nearestEnemy = hitCollider.transform;
+                }
+            }
+        }
+    }
+
+    private void MoveTowardsEnemy()
+    {
+        if (nearestEnemy != null)
+        {
+            Vector3 direction = (nearestEnemy.position - transform.position).normalized;
+            float distanceToEnemy = Vector3.Distance(transform.position, nearestEnemy.position);
+            animator.SetFloat("Speed", currentSpeed);
+            if (distanceToEnemy > attackRange)
+            {
+                transform.position += direction * moveSpeed * Time.deltaTime;
+                transform.LookAt(nearestEnemy);
+                
+                // เริ่มเล่น animation การเดิน
+                currentSpeed = moveSpeed;
+            }
+            else
+            {
+                isMovingToEnemy = false;
+                StopMoving();
+                PerformAttackAnimation();
+            }
+        }
+        else
+        {
+            isMovingToEnemy = false;
+            StopMoving();
+        }
+    }
+
+    private void StopMoving()
+    {
+        // หยุดเล่น animation การเดิน
+        currentSpeed = 0f;
+    }
+
+    private void PerformAttackAnimation()
+    {
+        // หยุดเล่น animation การเดินก่อนเริ่ม animation การโจมตี
+        StopMoving();
+
+        if (comboStep == 1)
+        {
+            animator.SetTrigger("Attack1");
+        }
+        else if (comboStep == 2)
+        {
+            animator.SetTrigger("Attack2");
+        }
+        else if (comboStep == 3)    
+        {
+            animator.SetTrigger("Attack3");
+            comboStep = 0;
+            animator.ResetTrigger("Attack1");
+            animator.ResetTrigger("Attack2");
+            
+        }
     }
     
     public void PerformAttack()
     {
-        attackVFX.gameObject.SetActive(true);
+        attackVFX.SetActive(true);
         _Trail.enabled = true;
         float effectDuration = 0.2f;
-       
         Invoke("StopEffect", effectDuration);
+
+        // ตรวจสอบและสร้างความเสียหายให้กับศัตรูที่อยู่ในระยะโจมตี
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayers);
+
+        foreach (Collider enemy in hitEnemies)
+        {
+            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+            if (enemyHealth != null)
+            {
+                PlayerManager playerManager = GetComponent<PlayerManager>();
+                float attackDamage = playerManager.CalculatePlayerAttackDamage();
+                enemyHealth.TakeDamage(attackDamage, playerManager.PlayerData.armorPenetration);
+            }
+        }
     }
     
     private void StopEffect()
     {
-        attackVFX.gameObject.SetActive(false);
-       _Trail.enabled = false;
+        attackVFX.SetActive(false);
+        _Trail.enabled = false;
     }
     
     public void EndAttack()
     {
         isAttacking = false;
+        isMovingToEnemy = false;
+        nearestEnemy = null;
+        StopMoving();
     }
     
     public void StartAttack()
@@ -90,15 +210,7 @@ public class PlayerAttack : MonoBehaviour
         isAttacking = true;
     }
 
-    public void EnableWeaponCollider()
-    {
-        weaponCollider.enabled = true;
-    }
-
-    public void DisableWeaponCollider()
-    {
-        weaponCollider.enabled = false;
-    }
+   
     
     void OnTriggerEnter(Collider other)
     {
@@ -108,17 +220,32 @@ public class PlayerAttack : MonoBehaviour
             
             if (enemyHealth != null)
             {
-                // _playerAttack.PerformAttack();
-               
                 PlayerManager playerManager = GetComponent<PlayerManager>();
-              
-                
-                //Skill Damage
                 float attackDamage = playerManager.CalculatePlayerAttackDamage();
-                enemyHealth.TakeDamage(attackDamage,playerManager.PlayerData.armorPenetration);
+                enemyHealth.TakeDamage(attackDamage, playerManager.PlayerData.armorPenetration);
             }
         }
     }
-    
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRadius);
+
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        if (nearestEnemy != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, nearestEnemy.position);
+        }
+    }
     
 }

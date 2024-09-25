@@ -15,12 +15,6 @@ public class FreeLookCameraController : MonoBehaviour
     public float lookAtCameraDistance = 3f; // ระยะที่ตัวละครจะหันหน้ามาทางกล้อง
     
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -44,8 +38,6 @@ public class FreeLookCameraController : MonoBehaviour
         {
             LookAtCamera();
         }
-        
-        
     }
     
     void LookAtCamera()

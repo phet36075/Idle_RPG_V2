@@ -114,20 +114,20 @@ public class EnemyAttack : MonoBehaviour
         //Debug.Log("Target Rotation: " + lookRotation.eulerAngles);  // ตรวจสอบการหมุนที่ควรจะเป็น
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
-    void OnTriggerEnter(Collider other)
+   
+
+    void animDealsDamage()
     {
-        // ตรวจสอบว่าชนกับผู้เล่น
-        if (isAttacking && other.CompareTag("Player"))
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        if (distanceToPlayer <= attackRange)
         {
-            // เข้าถึงสคริปต์ PlayerHealth ของผู้เล่น
-            PlayerManager playerHealth = other.GetComponent<PlayerManager>();
             int finalDamage = CalculateDamage();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDamage(finalDamage,_enemyData.EnemyData.armorPenetration);  // ส่งดาเมจให้กับผู้เล่น
-            }
+            PlayerManager playerManager = player.GetComponent<PlayerManager>();
+            
+            playerManager.TakeDamage(finalDamage,_enemyData.EnemyData.armorPenetration);
         }
     }
+    
     int CalculateDamage()
     {
         float randomFactor = Random.Range(1f - damageVariation, 1f + damageVariation);

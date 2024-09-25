@@ -4358,6 +4358,14 @@ MonoBehaviour:
   isAttacking: 0
   attackVFX: {fileID: 137497435}
   _Trail: {fileID: 1362233832}
+  detectionRadius: 5
+  moveSpeed: 5
+  attackRange: 2
+  attackRadius: 1
+  attackPoint: {fileID: 0}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &313719823
 Rigidbody:
   m_ObjectHideFlags: 0

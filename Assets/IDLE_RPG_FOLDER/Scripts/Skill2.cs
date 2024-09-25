@@ -56,7 +56,8 @@ public class Skill2 : MonoBehaviour,ISkill
         yield return new WaitForSeconds(1f);
 
         animator.speed = 2;
-        animator.applyRootMotion = false;
+        
+       // animator.applyRootMotion = false;
         
       // _aiController.GetComponent<NavMeshAgent>().enabled = false;
       _aiController.isAIActive = false;
@@ -76,7 +77,9 @@ public class Skill2 : MonoBehaviour,ISkill
         
         // ตำแหน่งสุดท้าย
         transform.position = endPosition;
-        animator.applyRootMotion = true;
+        
+     //   animator.applyRootMotion = true;
+        
         animator.speed = 1;
         
         GameObject effect = Instantiate(dashEffectPrefab, transform.position, Quaternion.identity);

@@ -25,6 +25,9 @@ public class AIController : MonoBehaviour
     public float skillUseInterval = 2f; // ระยะเวลาระหว่างการใช้สกิล
     
     
+    
+    
+    
     private void OnDisable()
     {
         if (currentIndicator != null)
