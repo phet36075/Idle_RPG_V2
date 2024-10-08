@@ -2,17 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public AIController aiController;
     public NavMeshAgent agent;
     public bool isAIEnabled = true;
     public bool isAIActive = true;
-    private bool wasManualInputActive = false;  
-    
-   
+    private bool wasManualInputActive = false;
+
+    public TextMeshProUGUI OnOffTxT;
     void Update()
     {
+        if (isAIEnabled == true)
+        {
+            OnOffTxT.text = "On";
+        }else if (isAIEnabled == false)
+        {
+            OnOffTxT.text = "Off";
+        }
+        
         if (Input.GetKeyDown(KeyCode.T)) // ปุ่มเพื่อสลับระหว่างผู้เล่นและ AI
         {
             ToggleAI();
