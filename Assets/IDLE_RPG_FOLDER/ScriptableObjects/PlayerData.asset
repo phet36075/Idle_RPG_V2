@@ -12,29 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f3f4b6540eef684398d568de5e1a4cf, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  maxHealth: 300
-  currentHealth: 300
+  maxHealth: 1800
+  currentHealth: 450
   baseDamage: 20
   DefaultbaseDamage: 20
-  weaponDamage: 5
+  weaponDamage: 110
   criticalChance: 0.05
-  defense: 5
-  armorPenetration: 0
+  defense: 505
+  armorPenetration: 5
   damageVariation: 0.2
-  regenRate: 5
-  criticalDamage: 2
+  regenRate: 90
+  criticalDamage: 2.05
   stage: 1
-  WeaponupgradeCost: 100
-  Weaponlevel: 1
-  healthUpgradeCost: 100
-  healthLevel: 1
-  regenRateCost: 100
-  regenRateLevel: 1
-  criticalRateCost: 100
+  WeaponupgradeCost: 3300
+  Weaponlevel: 22
+  healthUpgradeCost: 3500
+  healthLevel: 28
+  regenRateCost: 2400
+  regenRateLevel: 16
+  criticalRateCost: 1000
   criticalRateLevel: 1
-  defenseCost: 100
-  defenseLevel: 1
-  armorPenetrationCost: 100
-  armorPenetrationLevel: 1
-  criticalDamageCost: 100
+  defenseCost: 4050
+  defenseLevel: 27
+  armorPenetrationCost: 300
+  armorPenetrationLevel: 2
+  criticalDamageCost: 2500
   criticalDamageLevel: 1

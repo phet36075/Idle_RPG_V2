@@ -7917,6 +7917,7 @@ MonoBehaviour:
   agent: {fileID: 313719828}
   isAIEnabled: 1
   isAIActive: 1
+  OnOffTxT: {fileID: 1775107223}
 --- !u!136 &313719830
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -37351,6 +37352,7 @@ MonoBehaviour:
   agent: {fileID: 1274548293}
   isAIEnabled: 1
   isAIActive: 1
+  OnOffTxT: {fileID: 0}
 --- !u!114 &1274548287
 MonoBehaviour:
   m_ObjectHideFlags: 0
