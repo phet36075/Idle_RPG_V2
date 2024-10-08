@@ -7,25 +7,114 @@ using Random = UnityEngine.Random;
 
 public class EnemySpawner : MonoBehaviour
 {
-    
-    public GameObject enemyPrefab;  // ตัว prefab ของศัตรู
+    private TestTeleportPlayer _teleportPlayer;
+    private StageManager _stageManager;
+    public StageData _StageData;
+    public GameObject[] enemyPrefab;  // ตัว prefab ของศัตรู
     public float spawnInterval = 2f;  // ระยะเวลาระหว่างการเกิดของศัตรูแต่ละตัว
     public float spawnRadius = 10f;  // รัศมีของพื้นที่ที่ศัตรูจะเกิด
     public int maxEnemies = 10;  // จำนวนศัตรูสูงสุดที่จะเกิด
     public List<Transform> spawnPoints;  // ลิสต์ของตำแหน่งที่จะให้ศัตรูเกิด
-    
-    private int enemiesSpawned = 0;  // จำนวนศัตรูที่เกิดแล้ว
-    private int enemiesDefeated = 0;  // จำนวนศัตรูที่ถูกกำจัดแล้ว
+    private EnemyHealth _enemyHealth;
+    public int enemiesSpawned = 0;  // จำนวนศัตรูที่เกิดแล้ว
+    public int enemiesDefeated = 0;  // จำนวนศัตรูที่ถูกกำจัดแล้ว
 
+    public GameObject NextButton;
  
     public GameObject WinUI;
+    private GameObject enemy;
+    public int currentStage = 1;
+    public GameObject BossUI;
+    
+    public bool isClearing = false; // เพิ่มตัวแปรควบคุมการเคลียร์
     void Start()
     {
+        _teleportPlayer = FindObjectOfType<TestTeleportPlayer>();
+        _stageManager = FindObjectOfType<StageManager>();
+        currentStage = _StageData.currentStage;
         // เริ่มการเรียกฟังก์ชัน SpawnEnemy ซ้ำๆ ทุก spawnInterval วินาที
         InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
     }
+    void Update()
+    {
+        // เพิ่มการตรวจสอบการกดปุ่ม P
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ClearAllEnemies();
+        }
+    }
+    public void ClearAllEnemies()
+    {
+        isClearing = true; // ตั้งค่าเป็น true ก่อนเริ่มเคลียร์
 
-    void SpawnEnemy()
+        // หาศัตรูทั้งหมดในฉาก
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // ทำลายศัตรูทุกตัว
+        foreach (GameObject enemy in allEnemies)
+        {
+            Destroy(enemy);
+        }
+
+        // รีเซ็ตตัวแปรที่เกี่ยวข้อง
+        enemiesSpawned = 0;
+        enemiesDefeated = 0;
+        StartCoroutine(WaitAndResetClear());
+
+        Debug.Log("All enemies cleared!");
+    }
+
+    IEnumerator WaitAndResetClear()
+    {
+        yield return new WaitForSeconds(5f);
+        isClearing = false;
+    }
+    public int GetStage()
+    {
+        return currentStage;
+    }
+
+    public void NextStage()
+    {
+        currentStage += 1;
+        if (currentStage > 5)
+        {
+            _stageManager.ChangeMap(5);
+        }
+        else if(currentStage <=5 )
+        {
+            _stageManager.ChangeMap(currentStage -1);
+        }
+        enemiesDefeated = 0;
+        enemiesSpawned = 0;
+        InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
+        
+       
+    }
+
+    public void GotoBoss()
+    {
+        if (currentStage > 5)
+        {
+            _stageManager.ChangeMap(5);
+        }else if(currentStage <=5 )
+        {
+            _stageManager.ChangeMap(currentStage -1);
+        }
+        Vector3 newpos = new Vector3(-8, 2.1f, -6);
+        _teleportPlayer.TeleportPlayer(newpos);
+        ClearAllEnemies();
+        enemiesDefeated = 0;
+        enemiesSpawned = 0;
+        maxEnemies = 1;
+      
+       
+       
+        InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
+        currentStage += 1;
+        BossUI.SetActive(false);
+    }
+    public void SpawnEnemy()
     {
         // ตรวจสอบว่าจำนวนศัตรูที่เกิดแล้วยังไม่เกินค่าสูงสุด
         if (enemiesSpawned < maxEnemies)
@@ -44,10 +133,31 @@ public class EnemySpawner : MonoBehaviour
                 spawnPos = new Vector3(randomPos.x, 0, randomPos.y) + transform.position;
             }
 
+
+            if (currentStage % 5 == 0)
+            {
+                enemy = Instantiate(enemyPrefab[1], spawnPos, Quaternion.identity);
+                maxEnemies = 1;
+            }
+            else 
+            if ((currentStage - 4) % 5 == 0)
+            {
+                enemy = Instantiate(enemyPrefab[0], spawnPos, Quaternion.identity);
+                maxEnemies = 5;
+              
+            }
+            else
+
+            {
+                enemy = Instantiate(enemyPrefab[0], spawnPos, Quaternion.identity);
+                maxEnemies = 5;
+            }
+               
+            
            
+            
             // สร้างศัตรูที่ตำแหน่งที่เลือกได้
-            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-          
+            
             //Destroy(SpawnFX,0.5f);
             // เพิ่มจำนวนศัตรูที่เกิดแล้ว
             enemiesSpawned++;
@@ -64,17 +174,41 @@ public class EnemySpawner : MonoBehaviour
 
     public void EnemyDefeated()
     {
-        enemiesDefeated++;
-        
+        if (!isClearing) // เช็คว่าไม่ได้อยู่ในระหว่างการเคลียร์
+        {
+            enemiesDefeated++;
+            // ... (ส่วนอื่นๆ ของ EnemyDefeated ยังคงเหมือนเดิม)
+        }
+       // isClearing = false; // ตั้งค่ากลับเป็น false หลังจากเคลียร์เสร็จ
         // ตรวจสอบว่าได้กำจัดศัตรูครบตามจำนวนที่กำหนดหรือยัง
         if (enemiesDefeated >= maxEnemies)
         {
-            Debug.Log("All enemies defeated!");
+            if ((currentStage - 4) % 5 == 0)
+            {
+                Debug.Log("All enemies defeated! LOOPPPPPPPP");
+                BossUI.SetActive(true);
+                enemiesDefeated = 0;
+                enemiesSpawned = 0;
+                InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
+            }
            
-            WinUI.gameObject.SetActive(true);
+            else
+            {
+                BossUI.SetActive(false);
+                Debug.Log("All enemies defeated!");
+                WinUI.gameObject.SetActive(true);
+            }
+
+           
             
             // ทำอะไรก็ตามที่คุณต้องการเมื่อกำจัดศัตรูครบจำนวน เช่น แสดงข้อความชนะ หรือโหลดด่านต่อไป
         }
+    }
+
+    public void ResetEnemies()
+    {
+        enemiesDefeated = 0;
+        NextButton.SetActive(false);
     }
 }
 
@@ -83,10 +217,14 @@ public class EnemyDefeatedNotifier : MonoBehaviour
 {
     public EnemySpawner spawner;
 
-    void OnDestroy()
+
+    private void OnDestroy()
     {
-        // เมื่อ GameObject นี้ถูกทำลาย (ศัตรูถูกกำจัด) ให้แจ้ง EnemySpawner
-        spawner.EnemyDefeated();
+        if (spawner != null)
+        {
+            spawner.EnemyDefeated();
+        }
     }
+    
    
 }

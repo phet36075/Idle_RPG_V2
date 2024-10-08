@@ -1,18 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
-public class gameOverUI : MonoBehaviour
+using UnityEngine.SceneManagement;
+
+public class GameOverUI : MonoBehaviour
 {
-    public string Stagename;
     public float timeRemaining = 10;
     public TextMeshProUGUI timeText;
-    
+    public Animator playerAnim;
+    public Animator allyAnim;
+    private PlayerManager _playerManager;
+    private EnemySpawner _enemySpawner;
+    public string stageName;
+    private TestTeleportPlayer _teleportPlayer;
+    [SerializeField] private StageData stageData;
     // Start is called before the first frame update
     void Start()
     {
-       
+        _teleportPlayer = FindObjectOfType<TestTeleportPlayer>();
+        _playerManager = FindObjectOfType<PlayerManager>();
+        _enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     // Update is called once per frame
@@ -27,8 +34,20 @@ public class gameOverUI : MonoBehaviour
         }
     }
 
-  public void RetryStage()
-    {
-        SceneManager.LoadScene(Stagename);
-    }
+  private void RetryStage()
+  {
+      
+      _playerManager.currentHealth = _playerManager.playerData.maxHealth;
+      
+     // playerAnim.SetTrigger("Reset");
+     // allyAnim.SetTrigger("Reset");
+      _playerManager.ResetDie();
+     // stageData.currentStage = _enemySpawner.currentStage;
+     Vector3 newpos = new Vector3(-8, 2.1f, -6);
+      _teleportPlayer.TeleportPlayer(newpos);
+     // SceneManager.LoadScene(stageName);
+     timeRemaining = 10;
+    gameObject.SetActive(false);
+      
+  }
 }

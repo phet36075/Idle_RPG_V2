@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public AIController aiController;
     public NavMeshAgent agent;
-    private bool isAIEnabled = true;
+    public bool isAIEnabled = true;
     public bool isAIActive = true;
     private bool wasManualInputActive = false;  
     

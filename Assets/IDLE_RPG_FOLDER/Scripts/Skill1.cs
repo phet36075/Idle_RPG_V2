@@ -98,7 +98,7 @@ public class Skill1 : MonoBehaviour,ISkill
                 
                     //Skill Damage
                     float skillDamage = playerStats.CalculatePlayerAttackDamage(skillDmgLastHitAttack);
-                    enemyHealth.TakeDamage(skillDamage,playerStats.PlayerData.armorPenetration);
+                    enemyHealth.TakeDamage(skillDamage,playerStats.playerData.armorPenetration);
                 }
             
         }
@@ -125,7 +125,7 @@ public class Skill1 : MonoBehaviour,ISkill
                 
                 //Skill Damage
                 float skillDamage = playerStats.CalculatePlayerAttackDamage(skillDmgFirst2Hit);
-                enemyHealth.TakeDamage(skillDamage,playerStats.PlayerData.armorPenetration);
+                enemyHealth.TakeDamage(skillDamage,playerStats.playerData.armorPenetration);
             }
             
         }

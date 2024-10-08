@@ -15,12 +15,16 @@ public class CongratulationUI : MonoBehaviour
    private AIController _aiController;
 
    private PlayerController _playerController;
+   private TestTeleportPlayer _teleportPlayer;
+   private EnemySpawner enemySpawner;
     //public NavMeshAgent agent;
     // Start is called before the first frame update
     void Start()
     {
+        _teleportPlayer = FindObjectOfType<TestTeleportPlayer>();
         _aiController = FindObjectOfType<AIController>();
         _playerController = FindObjectOfType<PlayerController>();
+         enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     // Update is called once per frame
@@ -31,15 +35,31 @@ public class CongratulationUI : MonoBehaviour
 
         if (timeRemaining <= 0)
         {
+            
            GoNextStage();
         }
     }
 
     public void GoNextStage()
     {
-        PortalEffect.gameObject.SetActive(true);
-       _aiController.SetTarget(NextDoorLocation);
-        gameObject.SetActive(false);
        
+        Vector3 newpos = new Vector3(-8, 2.1f, -6);
+        _teleportPlayer.TeleportPlayer(newpos);
+        StartCoroutine(Wait());
+        
+      //  PortalEffect.gameObject.SetActive(true);
+       //_aiController.SetTarget(NextDoorLocation);
+       
+        
+    }
+
+    IEnumerator Wait()
+    {
+        
+        yield return new WaitForSeconds(1.5f);
+       
+        enemySpawner.NextStage();
+        timeRemaining = 10;
+        gameObject.SetActive(false);
     }
 }

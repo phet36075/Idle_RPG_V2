@@ -1,15 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 public class PlayerManager : MonoBehaviour
 {
-    public PlayerData PlayerData;
-   
+    public PlayerData playerData;
+    public Animator allyAnimator;
     public float currentHealth;
-    public DamageDisplay _damageDisplay;
+    public DamageDisplay damageDisplay;
     public Animator animator;
     public GameObject regenEffect;
     public GameObject hitVFX;
@@ -17,7 +13,7 @@ public class PlayerManager : MonoBehaviour
     public Transform spawnRegenPosition;
     public bool isCritical;
     public CharacterHitEffect hitEffect;
-    public string Stagename;
+    
     private PlayerController _playerController;
     private AIController _aiController;
     private AllyRangedCombat _allyRangedCombat;
@@ -25,57 +21,59 @@ public class PlayerManager : MonoBehaviour
     //public float regenRate = 1f;
     
     public float regenInterval = 5f;
-    public AudioManager _audioManager;
+    public AudioManager audioManager;
 
-    public bool IsPlayerDie = false;
+    public bool isPlayerDie;
     void Start()
     {
-        StartCoroutine(RegenerateHP());
+        StartCoroutine(RegenerateHp());
         _allyRangedCombat = FindObjectOfType<AllyRangedCombat>();
         _playerController = FindObjectOfType<PlayerController>();
         //hitEffect = GetComponent<CharacterHitEffect>();
-       currentHealth = PlayerData.currentHealth;
+       currentHealth = playerData.currentHealth;
       //  _damageDisplay = FindObjectOfType<DamageDisplay>();
         _aiController = FindObjectOfType<AIController>();
        // _audioManager = FindObjectOfType<AudioManager>();
     }
-    private IEnumerator RegenerateHP()
+    private IEnumerator RegenerateHp()
     {
         while (true)
         {
             yield return new WaitForSeconds(regenInterval);
 
-            if (currentHealth < PlayerData.maxHealth)
+            if (currentHealth < playerData.maxHealth)
             {
                 Quaternion rotation = Quaternion.Euler(-90f, 0, 0f);
                 GameObject regenEfx = Instantiate(regenEffect, spawnRegenPosition.position,rotation );
                 Destroy(regenEfx, 1f);
                 
-                currentHealth += PlayerData.regenRate;
-                currentHealth = Mathf.Min(currentHealth, PlayerData.maxHealth);
+                currentHealth += playerData.regenRate;
+                currentHealth = Mathf.Min(currentHealth, playerData.maxHealth);
                 Debug.Log("Current HP: " + currentHealth);
             }
         }
+        // ReSharper disable once IteratorNeverReturns
     }
+    
     
     public float CalculatePlayerAttackDamage(float skillDamageMultiplier = 1f)
     {
         // Start with base damage
-        float attackDamage = (PlayerData.baseDamage + PlayerData.weaponDamage) * skillDamageMultiplier;
+        float attackDamage = (playerData.baseDamage + playerData.weaponDamage) * skillDamageMultiplier;
         
         // Apply damage variation
-        float variationMultiplier = Random.Range(1 - PlayerData.damageVariation, 1 + PlayerData.damageVariation);
+        float variationMultiplier = Random.Range(1 - playerData.damageVariation, 1 + playerData.damageVariation);
         attackDamage *= variationMultiplier;
 
         // Apply critical hit
-        isCritical = Random.value < PlayerData.criticalChance;
+        isCritical = Random.value < playerData.criticalChance;
         if (isCritical)
         {
-            attackDamage *= 2f; // Double damage for critical hit
+            attackDamage *= playerData.criticalDamage; // Double damage for critical hit
             Debug.Log("Critical Hit!");
         }
         
-        Debug.Log($"Attack Damage: {attackDamage} (Base: {PlayerData.baseDamage}, Skill Multiplier: {skillDamageMultiplier}, Critical: {isCritical})");
+        Debug.Log($"Attack Damage: {attackDamage} (Base: {playerData.baseDamage}, Skill Multiplier: {skillDamageMultiplier}, Critical: {isCritical})");
         return attackDamage;
     }
     public void TakeDamage(float incomingDamage , float attackerArmorPenetration )
@@ -83,7 +81,7 @@ public class PlayerManager : MonoBehaviour
         hitEffect.StartHitEffect();
         
        // Apply armor penetration
-       float effectiveDefense = Mathf.Max(0, PlayerData.defense - attackerArmorPenetration);
+       float effectiveDefense = Mathf.Max(0, playerData.defense - attackerArmorPenetration);
 
        // Calculate damage reduction
        float damageReduction = effectiveDefense / (effectiveDefense + 100f);
@@ -96,8 +94,8 @@ public class PlayerManager : MonoBehaviour
 
         Debug.Log($"Player took {finalDamage} damage. Current health: {currentHealth}");
         
-        _audioManager.PlayHitSound();
-            _damageDisplay.DisplayDamage(finalDamage);
+        audioManager.PlayHitSound();
+        damageDisplay.DisplayDamage(finalDamage);
            Quaternion rotation = Quaternion.Euler(-90f, 0, 0f);
             GameObject effect = Instantiate(hitVFX, spawnVFXPosition.position,rotation );
             Destroy(effect, 1f);
@@ -113,19 +111,19 @@ public class PlayerManager : MonoBehaviour
     public void Heal(float amount)
     {
         currentHealth +=amount;
-        if (currentHealth >= PlayerData.maxHealth)
+        if (currentHealth >= playerData.maxHealth)
         {
-            currentHealth = PlayerData.maxHealth;
+            currentHealth = playerData.maxHealth;
         }
     }
 
     public void ChangeWeapon(float weaponDmg)
     {
-        PlayerData.weaponDamage = weaponDmg;
+        playerData.weaponDamage = weaponDmg;
     }
     void Die()
     {
-        IsPlayerDie = true;
+        isPlayerDie = true;
        // currentHealth = PlayerData.maxHealth;
        animator.SetTrigger("Die");
        _allyRangedCombat.Die();
@@ -138,9 +136,22 @@ public class PlayerManager : MonoBehaviour
        
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetDie()
     {
-       
+        StartCoroutine(WaitLoading());
+    }
+
+    public IEnumerator WaitLoading()
+    {
+        yield return new WaitForSeconds(1.0f);
+        animator.SetTrigger("Reset");
+        allyAnimator.SetTrigger("Reset");
+        yield return new WaitForSeconds(0.5f);
+        isPlayerDie = false;
+        GetComponent<CapsuleCollider>().enabled = true;
+        GetComponent<CharacterController>().enabled = false;
+        _playerController.isAIActive = true;
+        _playerController.isAIEnabled = true;
+        _playerController.enabled = true;
     }
 }

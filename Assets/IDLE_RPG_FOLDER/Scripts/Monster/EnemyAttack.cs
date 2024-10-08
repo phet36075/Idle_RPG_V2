@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using Random = UnityEngine.Random;
 public class EnemyAttack : MonoBehaviour
 {
+    private EnemySpawner _enemySpawner;
     public float attackRange = 1f;
     public float attackCooldown = 1f;
     private float lastAttackTime;
@@ -23,6 +24,7 @@ public class EnemyAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _enemySpawner = FindObjectOfType<EnemySpawner>();
         DisableCollision();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _playerManager = FindObjectOfType<PlayerManager>();
@@ -52,7 +54,7 @@ public class EnemyAttack : MonoBehaviour
             }
             else
             {
-                if (_playerManager.IsPlayerDie != true)
+                if (_playerManager.isPlayerDie != true)
                 {
                     GetComponent<EnemyRoaming>().enabled = false;
                     agent.SetDestination(transform.position);
@@ -137,7 +139,7 @@ public class EnemyAttack : MonoBehaviour
     int CalculateDamage()
     {
         float randomFactor = Random.Range(1f - damageVariation, 1f + damageVariation);
-        int finalDamage = Mathf.RoundToInt(_enemyData.EnemyData.BaseAttack * randomFactor);
+        int finalDamage = Mathf.RoundToInt(((_enemyData.EnemyData.BaseAttack * _enemySpawner.currentStage) * 1.25f) * randomFactor);
         return finalDamage;
         
     }

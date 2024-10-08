@@ -1,31 +1,29 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Tiny;
 using UnityEngine;
-using UnityEngine.VFX;
+using UnityEngine.Serialization;
+
 public class PlayerAttack : MonoBehaviour
 {
     public Animator animator;
     
     public AllyRangedCombat rangedAllies;  // เพิ่มอาร์เรย์ของพวกพ้องที่โจมตีระยะไกล
     
-    private int comboStep = 0;
-    private float lastAttackTime = 0f;
+    private int _comboStep;
+    private float _lastAttackTime;
     public float comboCooldown = 1f;
-    public bool isAttacking = false;
-    private Transform vfxPos;
+    public bool isAttacking;
+    private Transform _vfxPos;
     public GameObject attackVFX;
-    public Trail _Trail;
+    [FormerlySerializedAs("_Trail")] public Trail trail;
     
     public float detectionRadius = 5f; // รัศมีในการตรวจจับศัตรู
     public float moveSpeed = 5f; // ความเร็วในการเคลื่อนที่
     public float attackRange = 2f; // ระยะโจมตี
     public float attackRadius = 1f; // รัศมีการโจมตี
-    private Transform nearestEnemy; // เก็บ Transform ของศัตรูที่ใกล้ที่สุด
-    private bool isMovingToEnemy = false; // เพิ่มตัวแปรเพื่อตรวจสอบว่ากำลังเคลื่อนที่หาศัตรูหรือไม่
+    private Transform _nearestEnemy; // เก็บ Transform ของศัตรูที่ใกล้ที่สุด
+    private bool _isMovingToEnemy; // เพิ่มตัวแปรเพื่อตรวจสอบว่ากำลังเคลื่อนที่หาศัตรูหรือไม่
     
-    private float currentSpeed = 0f; // เพิ่มตัวแปรเก็บความเร็วปัจจุบัน
+    private float _currentSpeed; // เพิ่มตัวแปรเก็บความเร็วปัจจุบัน
     
     public Transform attackPoint; // จุดศูนย์กลางของการโจมตี
     public LayerMask enemyLayers; // Layer ของศัตรู
@@ -37,11 +35,11 @@ public class PlayerAttack : MonoBehaviour
 
     void Update()
     {
-        if (Time.time - lastAttackTime > comboCooldown)
+        if (Time.time - _lastAttackTime > comboCooldown)
         {
-            comboStep = 0;
+            _comboStep = 0;
             isAttacking = false;
-            isMovingToEnemy = false;
+            _isMovingToEnemy = false;
         }
         
         if (Input.GetKeyDown(KeyCode.F) && !isAttacking)
@@ -49,7 +47,7 @@ public class PlayerAttack : MonoBehaviour
             Attack();
         }
 
-        if (isMovingToEnemy && nearestEnemy != null)
+        if (_isMovingToEnemy && _nearestEnemy != null)
         {
             MoveTowardsEnemy();
         }
@@ -65,27 +63,27 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!isAttacking)
         {
-            lastAttackTime = Time.time;
+            _lastAttackTime = Time.time;
             isAttacking = true;
-            comboStep++;
+            _comboStep++;
             rangedAllies.CallAlliesToAttack();
 
             FindNearestEnemy();
 
-            if (nearestEnemy == null)
+            if (_nearestEnemy == null)
             {
                 PerformAttackAnimation();
             }
             else
             {
-                float distanceToEnemy = Vector3.Distance(transform.position, nearestEnemy.position);
+                float distanceToEnemy = Vector3.Distance(transform.position, _nearestEnemy.position);
                 if (distanceToEnemy <= attackRange)
                 {
                     PerformAttackAnimation();
                 }
                 else
                 {
-                    isMovingToEnemy = true;
+                    _isMovingToEnemy = true;
                     MoveTowardsEnemy();
                 }
             }
@@ -95,7 +93,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, detectionRadius);
         float closestDistance = Mathf.Infinity;
-        nearestEnemy = null;
+        _nearestEnemy = null;
 
         foreach (var hitCollider in hitColliders)
         {
@@ -105,7 +103,7 @@ public class PlayerAttack : MonoBehaviour
                 if (distance < closestDistance)
                 {
                     closestDistance = distance;
-                    nearestEnemy = hitCollider.transform;
+                    _nearestEnemy = hitCollider.transform;
                 }
             }
         }
@@ -113,29 +111,29 @@ public class PlayerAttack : MonoBehaviour
 
     private void MoveTowardsEnemy()
     {
-        if (nearestEnemy != null)
+        if (_nearestEnemy != null)
         {
-            Vector3 direction = (nearestEnemy.position - transform.position).normalized;
-            float distanceToEnemy = Vector3.Distance(transform.position, nearestEnemy.position);
-            animator.SetFloat("Speed", currentSpeed);
+            Vector3 direction = (_nearestEnemy.position - transform.position).normalized;
+            float distanceToEnemy = Vector3.Distance(transform.position, _nearestEnemy.position);
+            animator.SetFloat("Speed", _currentSpeed);
             if (distanceToEnemy > attackRange)
             {
                 transform.position += direction * moveSpeed * Time.deltaTime;
-                transform.LookAt(nearestEnemy);
+                transform.LookAt(_nearestEnemy);
                 
                 // เริ่มเล่น animation การเดิน
-                currentSpeed = moveSpeed;
+                _currentSpeed = moveSpeed;
             }
             else
             {
-                isMovingToEnemy = false;
+                _isMovingToEnemy = false;
                 StopMoving();
                 PerformAttackAnimation();
             }
         }
         else
         {
-            isMovingToEnemy = false;
+            _isMovingToEnemy = false;
             StopMoving();
         }
     }
@@ -143,7 +141,7 @@ public class PlayerAttack : MonoBehaviour
     private void StopMoving()
     {
         // หยุดเล่น animation การเดิน
-        currentSpeed = 0f;
+        _currentSpeed = 0f;
     }
 
     private void PerformAttackAnimation()
@@ -151,18 +149,18 @@ public class PlayerAttack : MonoBehaviour
         // หยุดเล่น animation การเดินก่อนเริ่ม animation การโจมตี
         StopMoving();
 
-        if (comboStep == 1)
+        if (_comboStep == 1)
         {
             animator.SetTrigger("Attack1");
         }
-        else if (comboStep == 2)
+        else if (_comboStep == 2)
         {
             animator.SetTrigger("Attack2");
         }
-        else if (comboStep == 3)    
+        else if (_comboStep == 3)    
         {
             animator.SetTrigger("Attack3");
-            comboStep = 0;
+            _comboStep = 0;
             animator.ResetTrigger("Attack1");
             animator.ResetTrigger("Attack2");
             
@@ -172,13 +170,13 @@ public class PlayerAttack : MonoBehaviour
     public void PerformAttack()
     {
         attackVFX.SetActive(true);
-        _Trail.enabled = true;
+        trail.enabled = true;
         float effectDuration = 0.2f;
         Invoke("StopEffect", effectDuration);
 
-        // ตรวจสอบและสร้างความเสียหายให้กับศัตรูที่อยู่ในระยะโจมตี
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius, enemyLayers);
-
+       
+       
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRadius,enemyLayers);
         foreach (Collider enemy in hitEnemies)
         {
             EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
@@ -186,7 +184,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 PlayerManager playerManager = GetComponent<PlayerManager>();
                 float attackDamage = playerManager.CalculatePlayerAttackDamage();
-                enemyHealth.TakeDamage(attackDamage, playerManager.PlayerData.armorPenetration);
+                enemyHealth.TakeDamage(attackDamage, playerManager.playerData.armorPenetration);
             }
         }
     }
@@ -194,14 +192,14 @@ public class PlayerAttack : MonoBehaviour
     private void StopEffect()
     {
         attackVFX.SetActive(false);
-        _Trail.enabled = false;
+        trail.enabled = false;
     }
     
     public void EndAttack()
     {
         isAttacking = false;
-        isMovingToEnemy = false;
-        nearestEnemy = null;
+        _isMovingToEnemy = false;
+        _nearestEnemy = null;
         StopMoving();
     }
     
@@ -222,7 +220,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 PlayerManager playerManager = GetComponent<PlayerManager>();
                 float attackDamage = playerManager.CalculatePlayerAttackDamage();
-                enemyHealth.TakeDamage(attackDamage, playerManager.PlayerData.armorPenetration);
+                enemyHealth.TakeDamage(attackDamage, playerManager.playerData.armorPenetration);
             }
         }
     }
@@ -241,10 +239,10 @@ public class PlayerAttack : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, attackRange);
 
-        if (nearestEnemy != null)
+        if (_nearestEnemy != null)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, nearestEnemy.position);
+            Gizmos.DrawLine(transform.position, _nearestEnemy.position);
         }
     }
     

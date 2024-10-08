@@ -120,7 +120,7 @@ public class Skill2 : MonoBehaviour,ISkill
                 
                 float skillDamage = playerStats.CalculatePlayerAttackDamage(skill2DmgDashThrough);
                 
-                enemyHealth.TakeDamage(skillDamage,playerStats.PlayerData.armorPenetration);
+                enemyHealth.TakeDamage(skillDamage,playerStats.playerData.armorPenetration);
                // damageable.TakeDamage(finalDamage);
             }
         }
@@ -139,7 +139,7 @@ public class Skill2 : MonoBehaviour,ISkill
                    
                 //Skill Damage
                 float skillDamage = playerStats.CalculatePlayerAttackDamage(skill2DmgAfterDashThrough);
-                enemyHealth.TakeDamage(skillDamage,playerStats.PlayerData.armorPenetration);
+                enemyHealth.TakeDamage(skillDamage,playerStats.playerData.armorPenetration);
             } 
         }
     }

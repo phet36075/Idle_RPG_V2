@@ -29,12 +29,10 @@ public class PlayerMovement : MonoBehaviour
    
    //Jump
    public float jumpHeight;
-
-  // public float jumpForce = 5f;
    public float gravity;
    private bool isGrounded;
    private Vector3 velocity;
-// public Rigidbody rb;
+
 
    private void Start()
    {
@@ -49,23 +47,10 @@ public class PlayerMovement : MonoBehaviour
       isGrounded = Physics.CheckSphere(groundcheck.position, groundDistance, groundmask);
       
       anim.SetBool("IsGrounded",isGrounded);
-      if (isGrounded && velocity.y < 0) ;
+      if (isGrounded && velocity.y < 0);
       {
          velocity.y = -2;
       }
-      
-      
-
-     
-
-     
-   
-     // Vector3 direction = transform.right * x + transform.forward * z;
-     
-    // Vector3 move = transform.right * x + transform.forward * z;
-      //controller.Move(direction * trueSpeed * Time.deltaTime);
-      
-      
       movement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
       Vector3 direction = new Vector3(movement.x, 0, movement.y).normalized;
 

@@ -14,10 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 300
   currentHealth: 300
-  baseDamage: 5
+  baseDamage: 20
+  DefaultbaseDamage: 20
   weaponDamage: 5
-  criticalChance: 0.1
-  defense: 10
+  criticalChance: 0.05
+  defense: 5
   armorPenetration: 0
   damageVariation: 0.2
   regenRate: 5
+  criticalDamage: 2
+  stage: 1
+  WeaponupgradeCost: 100
+  Weaponlevel: 1
+  healthUpgradeCost: 100
+  healthLevel: 1
+  regenRateCost: 100
+  regenRateLevel: 1
+  criticalRateCost: 100
+  criticalRateLevel: 1
+  defenseCost: 100
+  defenseLevel: 1
+  armorPenetrationCost: 100
+  armorPenetrationLevel: 1
+  criticalDamageCost: 100
+  criticalDamageLevel: 1

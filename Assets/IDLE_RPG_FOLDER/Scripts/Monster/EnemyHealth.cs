@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using System;
 public class EnemyHealth : MonoBehaviour
 {
+    private EnemySpawner _enemySpawner;
     public bool IsthisBoss = false;
     public GameObject CongratulationUI;
     [Header("-----------Health----------")]
     public EnemyData EnemyData;
     public Transform spawnVFXPosition;
+    public float maxHealth;
     public float currentHealth;
     public Slider healthBar;
     public bool isDead = false;
@@ -34,13 +37,16 @@ public class EnemyHealth : MonoBehaviour
    public AudioManager _audioManager;
    void Start()
    {
-       currentHealth = EnemyData.maxhealth;
-       healthBar.maxValue = EnemyData.maxhealth;
+       _enemySpawner = FindObjectOfType<EnemySpawner>();
+       maxHealth = (int)Math.Round((EnemyData.maxhealth * _enemySpawner.currentStage) * 1.25f);
+       currentHealth = maxHealth;
+       healthBar.maxValue = maxHealth;
        healthBar.value = currentHealth;
        spawner = FindObjectOfType<EnemySpawner>();
        _playerManager = FindObjectOfType<PlayerManager>();
-     //  _damageDisplay = FindObjectOfType<DamageDisplay>();
-     //  _audioManager = FindObjectOfType<AudioManager>();
+      
+       //  _damageDisplay = FindObjectOfType<DamageDisplay>();
+       //  _audioManager = FindObjectOfType<AudioManager>();
    }
 
    public void TakeDamage(float incomingDamage)
@@ -137,11 +143,11 @@ public class EnemyHealth : MonoBehaviour
     {
         if (IsthisBoss)
         {
-            CongratulationUI.gameObject.SetActive(true);
+           // CongratulationUI.gameObject.SetActive(true);
         }
         
         
-        CurrencyManager.Instance.AddMoney(EnemyData.moneyDrop);
+        CurrencyManager.Instance.AddMoney( Mathf.RoundToInt((EnemyData.moneyDrop * _enemySpawner.currentStage) *1.25f));
         isDead = true;
         animator.SetTrigger("Die");
         GetComponent<NavMeshAgent>().enabled = false;

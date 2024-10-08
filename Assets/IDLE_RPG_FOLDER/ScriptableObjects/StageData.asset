@@ -9,16 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8989e9eda936ad4498e9a95b08f51dd7, type: 3}
-  m_Name: EnemyData
+  m_Script: {fileID: 11500000, guid: 95e109e89312dac49a9b1e62c8c7af00, type: 3}
+  m_Name: StageData
   m_EditorClassIdentifier: 
-  maxhealth: 1000
-  DefaultMaxHealth: 50
-  enemyName: Enemy
-  defense: 10
-  armorPenetration: 0
-  isCritical: 0
-  BaseAttack: 10
-  DefaultBaseAttack: 10
-  moneyDrop: 100
-  DefaultmoneyDrop: 100
+  currentStage: 1
+  DefaultStage: 1

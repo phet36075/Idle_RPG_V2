@@ -7,6 +7,7 @@ public class UIManager : MonoBehaviour
 {
     private PlayerManager _PlayerManager;
     private CurrencyManager _currencyManager;
+    private EnemySpawner _enemySpawner;
     public TextMeshProUGUI _txtPlayerHealth;
     public TextMeshProUGUI _txtStage;
     //public AIController _AIController;
@@ -21,6 +22,7 @@ public class UIManager : MonoBehaviour
     {
         _currencyManager = FindObjectOfType<CurrencyManager>();
         _PlayerManager = FindObjectOfType<PlayerManager>();
+        _enemySpawner = FindObjectOfType<EnemySpawner>();
     }
 
     // Update is called once per frame
@@ -28,7 +30,7 @@ public class UIManager : MonoBehaviour
     {
         _txtMoney.text = _currencyManager.CurrentMoney.ToString();
         _txtPlayerHealth.text = _PlayerManager.currentHealth.ToString("0");
-        _txtStage.text = _PlayerManager.PlayerData.stage.ToString();
+        _txtStage.text = _enemySpawner.GetStage().ToString();
         /* _txtEnemiesDefeated.text = _EnemySpawner.enemiesDefeated.ToString();
          _txtTotalToDefeated.text = _EnemySpawner.totalEnemiesToDefeat.ToString();*/
     }

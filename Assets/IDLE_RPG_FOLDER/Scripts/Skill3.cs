@@ -97,7 +97,7 @@ public class Skill3 : MonoBehaviour,ISkill
                 
                     //Skill Damage
                     float skillDamage = playerStats.CalculatePlayerAttackDamage(skill3DmgLongSword);
-                    enemyHealth.TakeDamage(skillDamage,playerStats.PlayerData.armorPenetration);
+                    enemyHealth.TakeDamage(skillDamage,playerStats.playerData.armorPenetration);
                 }
             
         }
