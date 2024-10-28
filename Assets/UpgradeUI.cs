@@ -78,11 +78,11 @@ public class UpgradeUI : MonoBehaviour
 
     public void UpgradeHealth()
     {
-        if (_currencyManager.CurrentMoney >= _PlayerData.WeaponupgradeCost)
+        if (_currencyManager.CurrentMoney >= _PlayerData.healthUpgradeCost)
         {
             _PlayerData.healthLevel++;
             _currencyManager.SpendMoney(_PlayerData.healthUpgradeCost);
-            _PlayerData.maxHealth += 50;
+            _PlayerData.maxHealth += 150;
             _PlayerData.healthUpgradeCost= (int)Math.Round(100*( _PlayerData.healthLevel * 1.25f));
         }
     }
@@ -93,7 +93,7 @@ public class UpgradeUI : MonoBehaviour
         {
             _PlayerData.regenRateLevel++;
             _currencyManager.SpendMoney(_PlayerData.regenRateCost);
-            _PlayerData.regenRate += 5;
+            _PlayerData.regenRate += 10;
             _PlayerData.regenRateCost= (int)Math.Round(100*( _PlayerData.regenRateLevel * 1.5f));
         }
     }
@@ -114,7 +114,7 @@ public class UpgradeUI : MonoBehaviour
         {
             _PlayerData.defenseLevel++;
             _currencyManager.SpendMoney(_PlayerData.defenseCost);
-            _PlayerData.defense += 5f;
+            _PlayerData.defense += 30f;
             _PlayerData.defenseCost= (int)Math.Round(100*( _PlayerData.defenseLevel * 1.5f));
         }
     }

@@ -29,6 +29,7 @@ public class EnemySpawner : MonoBehaviour
     public bool isClearing = false; // เพิ่มตัวแปรควบคุมการเคลียร์
     void Start()
     {
+        _enemyHealth = FindObjectOfType<EnemyHealth>();
         _teleportPlayer = FindObjectOfType<TestTeleportPlayer>();
         _stageManager = FindObjectOfType<StageManager>();
         currentStage = _StageData.currentStage;
@@ -88,10 +89,12 @@ public class EnemySpawner : MonoBehaviour
         enemiesDefeated = 0;
         enemiesSpawned = 0;
         InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
-        
-       
+
+      
+
     }
 
+   
     public void GotoBoss()
     {
         if (currentStage > 5)

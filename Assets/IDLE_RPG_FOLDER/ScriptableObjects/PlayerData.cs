@@ -43,13 +43,14 @@ public class PlayerData : ScriptableObject
     public int criticalDamageLevel = 1;
     private void OnEnable()
     {
-        currentHealth = maxHealth;
+       
         ResetToDefault();
     }
     
     public void ResetToDefault()
     {
 
+       
         baseDamage = DefaultbaseDamage;
         weaponDamage = 5f;
         criticalChance = 0.05f;
@@ -60,21 +61,27 @@ public class PlayerData : ScriptableObject
         Weaponlevel = 1;
         WeaponupgradeCost = 100;
 
+        maxHealth = 300;
+        currentHealth = maxHealth;
         healthLevel = 1;
         healthUpgradeCost = 100;
 
+        regenRate = 5;
         regenRateLevel = 1;
         regenRateCost = 250;
 
         criticalRateLevel = 1;
         criticalRateCost = 1000;
 
+        defense = 5;
         defenseLevel = 1;
         defenseCost = 125;
 
+        armorPenetration = 0;
         armorPenetrationLevel = 1;
         armorPenetrationCost = 200;
 
+        criticalDamage = 2;
         criticalDamageLevel = 1;
         criticalDamageCost = 2500;
 

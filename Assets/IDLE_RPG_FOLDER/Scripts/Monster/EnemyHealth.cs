@@ -37,6 +37,7 @@ public class EnemyHealth : MonoBehaviour
    public AudioManager _audioManager;
    void Start()
    {
+      
        _enemySpawner = FindObjectOfType<EnemySpawner>();
        maxHealth = (int)Math.Round((EnemyData.maxhealth * _enemySpawner.currentStage) * 1.25f);
        currentHealth = maxHealth;
@@ -44,6 +45,8 @@ public class EnemyHealth : MonoBehaviour
        healthBar.value = currentHealth;
        spawner = FindObjectOfType<EnemySpawner>();
        _playerManager = FindObjectOfType<PlayerManager>();
+      // EnemyData.armorPenetration = (EnemyData.armorPenetration * _enemySpawner.currentStage) * 1.25f;
+      // EnemyData.defense = (EnemyData.defense * _enemySpawner.currentStage) * 1.25f;
       
        //  _damageDisplay = FindObjectOfType<DamageDisplay>();
        //  _audioManager = FindObjectOfType<AudioManager>();
@@ -158,6 +161,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = 0;
     }
 
+   
     public bool IsAlive()
     {
         return currentHealth > 0;

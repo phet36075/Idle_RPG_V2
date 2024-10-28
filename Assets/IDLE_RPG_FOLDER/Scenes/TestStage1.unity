@@ -7732,8 +7732,8 @@ MonoBehaviour:
   groundcheck: {fileID: 766758728}
   groundDistance: 0.4
   cam: {fileID: 123704379}
-  walkSpeed: 1
-  sprintSpeed: 3
+  walkSpeed: 2
+  sprintSpeed: 4
   jumpHeight: 1
   gravity: -9.1
 --- !u!143 &313719820

@@ -9,6 +9,8 @@ public class CongratulationUI : MonoBehaviour
     public float timeRemaining = 10;
     public TextMeshProUGUI timeText;
 
+   
+    
     public Transform NextDoorLocation;
     public GameObject PortalEffect;
     //public Animator playerAnimator;
@@ -37,12 +39,14 @@ public class CongratulationUI : MonoBehaviour
         {
             
            GoNextStage();
+          
         }
     }
 
     public void GoNextStage()
     {
-       
+        
+      // enemySpawner.ChangeStateForEnemy();
         Vector3 newpos = new Vector3(-8, 2.1f, -6);
         _teleportPlayer.TeleportPlayer(newpos);
         StartCoroutine(Wait());
@@ -57,9 +61,9 @@ public class CongratulationUI : MonoBehaviour
     {
         
         yield return new WaitForSeconds(1.5f);
-       
-        enemySpawner.NextStage();
         timeRemaining = 10;
+        enemySpawner.NextStage();
+       
         gameObject.SetActive(false);
     }
 }

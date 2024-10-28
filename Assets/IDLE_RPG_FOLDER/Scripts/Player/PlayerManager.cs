@@ -148,7 +148,7 @@ public class PlayerManager : MonoBehaviour
         allyAnimator.SetTrigger("Reset");
         yield return new WaitForSeconds(0.5f);
         isPlayerDie = false;
-        GetComponent<CapsuleCollider>().enabled = true;
+       // GetComponent<CapsuleCollider>().enabled = true;
         GetComponent<CharacterController>().enabled = false;
         _playerController.isAIActive = true;
         _playerController.isAIEnabled = true;
