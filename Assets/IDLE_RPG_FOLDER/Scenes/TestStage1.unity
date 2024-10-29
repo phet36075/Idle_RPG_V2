@@ -3713,7 +3713,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123704376}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19924237, y: 0.0138185285, z: -0.0028098582, w: 0.9798488}
+  m_LocalRotation: {x: 0.19924228, y: 0.013818522, z: -0.002809856, w: 0.9798488}
   m_LocalPosition: {x: -7.731, y: 4.6, z: -5.6000004}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6229,7 +6229,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 238858932}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23383032, y: 0.013710337, z: -0.0032976486, w: 0.9721752}
+  m_LocalRotation: {x: 0.23383024, y: 0.013710336, z: -0.0032976505, w: 0.97217524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -27808,7 +27808,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1119213784}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.19924238, y: 0.0138185555, z: -0.002809864, w: 0.9798488}
+  m_LocalRotation: {x: 0.1992423, y: 0.013818549, z: -0.0028098624, w: 0.9798488}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40976,7 +40976,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375862760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16475183, y: 0.013908608, z: -0.0023234526, w: 0.98623425}
+  m_LocalRotation: {x: 0.16475175, y: 0.01390861, z: -0.0023234515, w: 0.9862343}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -48004,11 +48004,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapPrefabs:
   - {fileID: 1181561018302404052, guid: be31f1e9c829b954f9398628546418ef, type: 3}
-  - {fileID: 1181561018302404052, guid: acbea91766141bd4ca12e04867c62ad0, type: 3}
-  - {fileID: 1181561018302404052, guid: 66d27a5da8c97df46917f6307f5e38b1, type: 3}
-  - {fileID: 1181561018302404052, guid: eaebf527ef8c3094bacaf04de731e352, type: 3}
-  - {fileID: 1181561018302404052, guid: 388bb152f739a23418a6f3cebf053524, type: 3}
-  - {fileID: 6073879159424895598, guid: d8e718aba3904d143ab1e14b1667df46, type: 3}
+  - {fileID: 6073879159424895598, guid: 4af9c92273374f741be71e52b45086a1, type: 3}
+  - {fileID: 6073879159424895598, guid: be7cc2fdcacea2d4eb86a2d1328da2c5, type: 3}
+  - {fileID: 6073879159424895598, guid: bf3e2721089fe074e929eb7256cd1783, type: 3}
+  - {fileID: 6073879159424895598, guid: 13c203f7ad0afd4419a0aef4af1845eb, type: 3}
+  - {fileID: 6073879159424895598, guid: 40c20fbacc668e648b91eb9cec947f35, type: 3}
   navMeshSurface: {fileID: 1317817397}
   startingMapIndex: 0
 --- !u!114 &1704181152

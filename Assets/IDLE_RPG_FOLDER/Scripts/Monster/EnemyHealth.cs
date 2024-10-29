@@ -14,6 +14,7 @@ public class EnemyHealth : MonoBehaviour
     public Transform spawnVFXPosition;
     public float maxHealth;
     public float currentHealth;
+    public float defense;
     public Slider healthBar;
     public bool isDead = false;
 
@@ -43,6 +44,8 @@ public class EnemyHealth : MonoBehaviour
        currentHealth = maxHealth;
        healthBar.maxValue = maxHealth;
        healthBar.value = currentHealth;
+       
+       defense =(( EnemyData.defense * _enemySpawner.currentStage) * 1.1f);
        spawner = FindObjectOfType<EnemySpawner>();
        _playerManager = FindObjectOfType<PlayerManager>();
       // EnemyData.armorPenetration = (EnemyData.armorPenetration * _enemySpawner.currentStage) * 1.25f;
@@ -90,7 +93,7 @@ public class EnemyHealth : MonoBehaviour
    public void TakeDamage(float incomingDamage, float attackerArmorPenetration)
     {
         // Apply armor penetration
-        float effectiveDefense = Mathf.Max(0, EnemyData.defense - attackerArmorPenetration);
+        float effectiveDefense = Mathf.Max(0,defense - attackerArmorPenetration);
 
         // Calculate damage reduction
         float damageReduction = effectiveDefense / (effectiveDefense + 100f);

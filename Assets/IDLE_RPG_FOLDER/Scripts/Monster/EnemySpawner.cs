@@ -25,7 +25,8 @@ public class EnemySpawner : MonoBehaviour
     private GameObject enemy;
     public int currentStage = 1;
     public GameObject BossUI;
-    
+
+    public int MapIndex;
     public bool isClearing = false; // เพิ่มตัวแปรควบคุมการเคลียร์
     void Start()
     {
@@ -78,14 +79,14 @@ public class EnemySpawner : MonoBehaviour
     public void NextStage()
     {
         currentStage += 1;
-        if (currentStage > 5)
-        {
-            _stageManager.ChangeMap(5);
-        }
+      /*  if (currentStage > 5)
+        {*/
+            _stageManager.ChangeMap(MapIndex);
+      /*  }
         else if(currentStage <=5 )
         {
             _stageManager.ChangeMap(currentStage -1);
-        }
+        }*/
         enemiesDefeated = 0;
         enemiesSpawned = 0;
         InvokeRepeating("SpawnEnemy", 0f, spawnInterval);
@@ -97,13 +98,13 @@ public class EnemySpawner : MonoBehaviour
    
     public void GotoBoss()
     {
-        if (currentStage > 5)
-        {
-            _stageManager.ChangeMap(5);
-        }else if(currentStage <=5 )
+       /* if (currentStage > 5)
+        {*/
+            _stageManager.ChangeMap(MapIndex);
+      /*  }else if(currentStage <=5 )
         {
             _stageManager.ChangeMap(currentStage -1);
-        }
+        }*/
         Vector3 newpos = new Vector3(-8, 2.1f, -6);
         _teleportPlayer.TeleportPlayer(newpos);
         ClearAllEnemies();
@@ -137,37 +138,44 @@ public class EnemySpawner : MonoBehaviour
             }
 
 
-            if (currentStage % 5 == 0)
-            {
-                enemy = Instantiate(enemyPrefab[4], spawnPos, Quaternion.identity);
-                maxEnemies = 1;
-            }
-            else 
-            if ((currentStage - 4) % 5 == 0) // ด่าน 4,9 , 14
-            {
-                enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
-                maxEnemies = 5;
-              
-            }
-            else if ((currentStage - 1) % 5 == 0)
+           
+           
+           if ((currentStage - 1) % 5 == 0) // ด่าน 1 6 11 16
             {
                 enemy = Instantiate(enemyPrefab[0], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
+                MapIndex = 1;
             }
-            else if ((currentStage - 2) % 5 == 0)
+            else if ((currentStage - 2) % 5 == 0) // ด่าน 2 7 12 17
             {
                 enemy = Instantiate(enemyPrefab[1], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
+                MapIndex = 2;
             }
-            else if ((currentStage - 3) % 5 == 0)
+            else if ((currentStage - 3) % 5 == 0) // ด่าน 3 8 13 18
             {
                 enemy = Instantiate(enemyPrefab[2], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
+                MapIndex = 3;
+            }
+            else 
+            if ((currentStage - 4) % 5 == 0) // ด่าน 4,9 , 14 19
+            {
+                enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
+                maxEnemies = 5;
+                MapIndex = 4;
+            }
+            else if (currentStage % 5 == 0) // ด่าน 5 10
+            {
+                enemy = Instantiate(enemyPrefab[4], spawnPos, Quaternion.identity);
+                maxEnemies = 1;
+                MapIndex = 5;
             }
             else
             {
                 enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
+                MapIndex = 5;
             }
                
             
