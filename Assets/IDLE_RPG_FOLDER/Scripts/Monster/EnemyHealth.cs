@@ -8,7 +8,7 @@ public class EnemyHealth : MonoBehaviour
 {
     private EnemySpawner _enemySpawner;
     public bool IsthisBoss = false;
-    public GameObject CongratulationUI;
+    //public GameObject CongratulationUI;
     [Header("-----------Health----------")]
     public EnemyData EnemyData;
     public Transform spawnVFXPosition;

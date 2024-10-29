@@ -696,7 +696,7 @@ Material:
     - _glowMin: 0
     - _lilDirectionalLightStrength: 1
     - _lilShadowCasterBias: 0
-    - _lilToonVersion: 43
+    - _lilToonVersion: 44
     - _marchDistance: 0.5
     - _numSteps: 16
     m_Colors:

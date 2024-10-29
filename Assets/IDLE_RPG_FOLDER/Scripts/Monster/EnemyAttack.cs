@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
     public float attackRange = 1f;
     public float attackCooldown = 1f;
     private float lastAttackTime;
-    public Collider enemySwordCollider;
+   // public Collider enemySwordCollider;
     
     public Animator animator;
     private NavMeshAgent agent;
@@ -25,7 +25,7 @@ public class EnemyAttack : MonoBehaviour
     void Start()
     {
         _enemySpawner = FindObjectOfType<EnemySpawner>();
-        DisableCollision();
+      //  DisableCollision();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         _playerManager = FindObjectOfType<PlayerManager>();
         animator = GetComponent<Animator>();
@@ -77,16 +77,16 @@ public class EnemyAttack : MonoBehaviour
         
     }
 
-    public void EnableCollision()
+    /*public void EnableCollision()
     {
         enemySwordCollider.enabled = true;
         isAttacking = true;
-    }
-    public void DisableCollision()
+    }*/
+  /*  public void DisableCollision()
     {
         enemySwordCollider.enabled = false;
         isAttacking = false;
-    }
+    }*/
     
 
     public void AttackPlayer()

@@ -3268,7 +3268,7 @@ Material:
     - _egci: 2
     - _lilDirectionalLightStrength: 1
     - _lilShadowCasterBias: 0
-    - _lilToonVersion: 43
+    - _lilToonVersion: 44
     - footer_discord: 0
     - footer_github: 0
     - footer_patreon: 0

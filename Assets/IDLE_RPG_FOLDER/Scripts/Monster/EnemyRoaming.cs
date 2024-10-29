@@ -33,6 +33,7 @@ public class EnemyRoaming : MonoBehaviour
         {
 //            Debug.Log("Moving to new position: " + navHit.position);  // ตรวจสอบตำแหน่งเป้าหมาย
             navMeshAgent.SetDestination(navHit.position);
+            
         }
         else
         {
@@ -46,6 +47,8 @@ public class EnemyRoaming : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float speed = navMeshAgent.velocity.magnitude; // คำนวณความเร็ว
+        animator.SetFloat("Speed", speed); // อัปเดตพารามิเตอร์ Speed ใน Animator
         if (navMeshAgent.velocity.magnitude > 0.1f)
         {
             animator.SetBool("IsWalking", true);  // เริ่มเล่นอนิเมชั่นเดิน
