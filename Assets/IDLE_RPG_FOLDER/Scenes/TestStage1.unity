@@ -47791,7 +47791,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _StageData: {fileID: 11400000, guid: b115b53cc793f404690921f8ec959ec1, type: 2}
   enemyPrefab:
-  - {fileID: 882309988849078929, guid: 41637cde435445f48a42531de8f2ad67, type: 3}
+  - {fileID: 4147698861418443257, guid: a2434677fd6527546bb260938cb6a40d, type: 3}
   - {fileID: 7055057859302053167, guid: fc6171bec41ba934aadd9947c96ea518, type: 3}
   spawnInterval: 2
   spawnRadius: 10
