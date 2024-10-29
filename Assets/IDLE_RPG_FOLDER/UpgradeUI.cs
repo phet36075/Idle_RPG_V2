@@ -9,6 +9,7 @@ public class UpgradeUI : MonoBehaviour
 {
     public PlayerData _PlayerData;
     private CurrencyManager _currencyManager;
+    private ProjectileMovement _projectileMovement;
     public TextMeshProUGUI WeaponUpgradeCostTxT;
     public TextMeshProUGUI WeaponDmg;
 
@@ -30,6 +31,9 @@ public class UpgradeUI : MonoBehaviour
     
     public TextMeshProUGUI CriticalDamageUpgradeCostTxT;
     public TextMeshProUGUI CriticalDamageTxT;
+    
+   /* public TextMeshProUGUI AllyDamageUpgradeCostTxT;
+    public TextMeshProUGUI AllyDamageTxT;*/
     //public int upgradeCost;
     private float level = 1;
     private bool isVisible = false;
@@ -37,7 +41,8 @@ public class UpgradeUI : MonoBehaviour
     void Start()
     {
         _currencyManager = FindObjectOfType<CurrencyManager>();
-       // _PlayerData.upgradeCost = 100;
+        _projectileMovement = FindObjectOfType<ProjectileMovement>();
+        // _PlayerData.upgradeCost = 100;
     }
 
     // Update is called once per frame
@@ -63,6 +68,8 @@ public class UpgradeUI : MonoBehaviour
 
         CriticalDamageUpgradeCostTxT.text = _PlayerData.criticalDamageCost.ToString();
         CriticalDamageTxT.text = _PlayerData.criticalDamage.ToString();
+
+        
     }
 
     public void UpgradeWeapon()

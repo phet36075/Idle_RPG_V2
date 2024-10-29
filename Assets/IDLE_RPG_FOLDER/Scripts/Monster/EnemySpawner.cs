@@ -154,14 +154,14 @@ public class EnemySpawner : MonoBehaviour
             }
             else if ((currentStage - 3) % 5 == 0) // ด่าน 3 8 13 18
             {
-                enemy = Instantiate(enemyPrefab[2], spawnPos, Quaternion.identity);
+                enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
                 MapIndex = 3;
             }
             else 
             if ((currentStage - 4) % 5 == 0) // ด่าน 4,9 , 14 19
             {
-                enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
+                enemy = Instantiate(enemyPrefab[2], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
                 MapIndex = 4;
             }
@@ -173,7 +173,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
+                enemy = Instantiate(enemyPrefab[2], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
                 MapIndex = 5;
             }

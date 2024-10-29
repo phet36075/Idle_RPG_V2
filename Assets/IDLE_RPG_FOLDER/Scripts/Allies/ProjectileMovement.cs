@@ -11,11 +11,15 @@ public class ProjectileMovement : MonoBehaviour
     public GameObject hitEffectPrefab;
     public float damageVariation = 0.2f;  // กำหนดเปอร์เซ็นต์การแกว่งของดาเมจ (เช่น 0.2 = ±20%)
     public float distanceEnemy = 0.2f;
-    
-    
+
+  //  private PlayerManager _playerManeger;
+     void Start()
+     {
+         //_playerManeger = FindObjectOfType<PlayerManager>();
+     }
     void Update()
     {
-        
+       // baseDamage = _playerManeger.playerData.weaponDamage;
         if (target != null)
         {
             Vector3 direction = (target.position - transform.position).normalized;
@@ -53,11 +57,7 @@ public class ProjectileMovement : MonoBehaviour
     {
         baseDamage = newDamage;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+   
     
    public void Explode()
     {

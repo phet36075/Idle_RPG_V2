@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class PlayerData : ScriptableObject
 {
+    public float DefaultmaxHealth;
     public float maxHealth = 100f;
     public float currentHealth;
     public float baseDamage = 10f;
@@ -61,7 +62,7 @@ public class PlayerData : ScriptableObject
         Weaponlevel = 1;
         WeaponupgradeCost = 100;
 
-        maxHealth = 300;
+        maxHealth = DefaultmaxHealth;
         currentHealth = maxHealth;
         healthLevel = 1;
         healthUpgradeCost = 100;
