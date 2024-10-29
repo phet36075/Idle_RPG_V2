@@ -149,7 +149,7 @@ public class EnemyHealth : MonoBehaviour
            // CongratulationUI.gameObject.SetActive(true);
         }
         
-        
+        _audioManager.PlayDieSound();
         CurrencyManager.Instance.AddMoney( Mathf.RoundToInt((EnemyData.moneyDrop * _enemySpawner.currentStage) *1.25f));
         isDead = true;
         animator.SetTrigger("Die");

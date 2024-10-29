@@ -5,7 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource audioSource;
-    public AudioClip hitSound,hitCritSound;
+    public AudioClip hitSound,hitCritSound , MonsterPainSound,DieSound;
     
     // Start is called before the first frame update
     void Start()
@@ -21,14 +21,19 @@ public class AudioManager : MonoBehaviour
     
     public void PlayHitSound()
     {
-        
+        audioSource.PlayOneShot(MonsterPainSound);
         audioSource.PlayOneShot(hitSound);
         
     }
 
     public void PlayHitCritSound()
     {
-        
+        audioSource.PlayOneShot(MonsterPainSound);
         audioSource.PlayOneShot(hitCritSound);
+    }
+
+    public void PlayDieSound()
+    {
+        audioSource.PlayOneShot(DieSound);
     }
 }

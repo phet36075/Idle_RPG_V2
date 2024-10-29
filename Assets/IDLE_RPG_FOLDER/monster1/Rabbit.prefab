@@ -691,7 +691,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackRange: 2
   attackCooldown: 2
-  enemySwordCollider: {fileID: 7884874271953235674}
   animator: {fileID: 6072076048926620861}
   chaseRange: 4
   rotationSpeed: 5
@@ -709,9 +708,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsthisBoss: 0
-  CongratulationUI: {fileID: 0}
   EnemyData: {fileID: 11400000, guid: 83bb35b548d1bda4a89d3925dbaa19f9, type: 2}
   spawnVFXPosition: {fileID: 7889860477523577515}
+  maxHealth: 0
   currentHealth: 0
   healthBar: {fileID: 7172195641874481342}
   isDead: 0
@@ -755,6 +754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roamRadius: 4
   roamDelay: 3
+  walkingSound: {fileID: 8300000, guid: 0eca8f949ecb00e449cd0d211b8fede1, type: 3}
 --- !u!114 &5910275300880308688
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -783,6 +783,8 @@ MonoBehaviour:
   audioSource: {fileID: 4562360742695508188}
   hitSound: {fileID: 8300000, guid: d152b73a7f8eef742bad8a4cc1458b9c, type: 3}
   hitCritSound: {fileID: 8300000, guid: 199d7eede6a5930418e666b222d1ad36, type: 3}
+  MonsterPainSound: {fileID: 8300000, guid: 40ac21ef67a5bad4693c9a47eaffcc71, type: 3}
+  DieSound: {fileID: 8300000, guid: 40ac21ef67a5bad4693c9a47eaffcc71, type: 3}
 --- !u!82 &4562360742695508188
 AudioSource:
   m_ObjectHideFlags: 0

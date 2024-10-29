@@ -1023,7 +1023,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsthisBoss: 0
-  CongratulationUI: {fileID: 0}
   EnemyData: {fileID: 11400000, guid: 352734a712f37fe4fb237689298a875f, type: 2}
   spawnVFXPosition: {fileID: 5503190135005439608}
   maxHealth: 0
@@ -1172,6 +1171,8 @@ MonoBehaviour:
   audioSource: {fileID: 2491451905540115383}
   hitSound: {fileID: 8300000, guid: d152b73a7f8eef742bad8a4cc1458b9c, type: 3}
   hitCritSound: {fileID: 8300000, guid: 199d7eede6a5930418e666b222d1ad36, type: 3}
+  MonsterPainSound: {fileID: 8300000, guid: 40ac21ef67a5bad4693c9a47eaffcc71, type: 3}
+  DieSound: {fileID: 8300000, guid: 40ac21ef67a5bad4693c9a47eaffcc71, type: 3}
 --- !u!114 &3304348286440733885
 MonoBehaviour:
   m_ObjectHideFlags: 0

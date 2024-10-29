@@ -12,6 +12,9 @@ public class EnemyRoaming : MonoBehaviour
     private NavMeshAgent navMeshAgent;
 
     private Vector3 startingPosition;
+    
+    public AudioClip walkingSound; // คลิปเสียงสำหรับการเดิน
+    private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +22,17 @@ public class EnemyRoaming : MonoBehaviour
         startingPosition = transform.position;
         RoamToNewPosition();
         animator = GetComponent<Animator>();
+        
+        // กำหนดค่า AudioSource สำหรับเสียงแบบ 3D
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = walkingSound;
+        audioSource.loop = true; // ให้เสียงเล่นวนซ้ำ
+        audioSource.spatialBlend = 1.0f; // ตั้งค่า spatialBlend ให้เป็น 1 เพื่อใช้เสียงแบบ 3D
+        audioSource.minDistance = 1f; // ระยะใกล้สุดที่เสียงจะดังชัดเจน
+        audioSource.maxDistance = 15f; // ระยะไกลสุดที่เสียงจะเริ่มเบา
+        audioSource.rolloffMode = AudioRolloffMode.Linear; // กำหนดโหมดการลดระดับเสียงตามระยะทาง
+        
+        
     }
 
     void RoamToNewPosition()
@@ -52,10 +66,28 @@ public class EnemyRoaming : MonoBehaviour
         if (navMeshAgent.velocity.magnitude > 0.1f)
         {
             animator.SetBool("IsWalking", true);  // เริ่มเล่นอนิเมชั่นเดิน
+            PlayWalkSound();
         }
         else
         {
             animator.SetBool("IsWalking", false); // หยุดเล่นอนิเมชั่นเดิน
+            StopWalkSound();
+        }
+    }
+
+    void PlayWalkSound()
+    {
+        if (!audioSource.isPlaying) // ถ้าเสียงยังไม่เล่น ให้เล่นเสียง
+        {
+            audioSource.Play();
+        }
+    }
+
+    void StopWalkSound()
+    {
+        if (audioSource.isPlaying) // ถ้าเสียงกำลังเล่นอยู่ ให้หยุดเสียง
+        {
+            audioSource.Stop();
         }
     }
 }
