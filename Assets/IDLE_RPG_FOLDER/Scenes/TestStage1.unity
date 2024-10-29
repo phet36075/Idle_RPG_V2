@@ -47791,8 +47791,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _StageData: {fileID: 11400000, guid: b115b53cc793f404690921f8ec959ec1, type: 2}
   enemyPrefab:
+  - {fileID: 4147698861418443257, guid: 7fe54cac938fe8e469ae8892588a6942, type: 3}
   - {fileID: 4147698861418443257, guid: a2434677fd6527546bb260938cb6a40d, type: 3}
+  - {fileID: 4147698861418443257, guid: 6f0e72cbc35dc9c4f9e333843b27fada, type: 3}
+  - {fileID: 4147698861418443257, guid: db5fd069a9d54574180e435ea53bb25e, type: 3}
   - {fileID: 7055057859302053167, guid: fc6171bec41ba934aadd9947c96ea518, type: 3}
+  - {fileID: 882309988849078929, guid: 41637cde435445f48a42531de8f2ad67, type: 3}
   spawnInterval: 2
   spawnRadius: 10
   maxEnemies: 2
@@ -48579,11 +48583,11 @@ MonoBehaviour:
   mouseXInputName: Mouse X
   mouseYInputName: Mouse Y
   mouseScrollInputName: Mouse ScrollWheel
-  zoomSpeed: 10
+  zoomSpeed: 100
   minZoom: 1
   maxZoom: 100
   lookAtCameraDistance: 30
-  rotationSpeedMultiplier: 5
+  rotationSpeedMultiplier: 3
 --- !u!114 &1729740482
 MonoBehaviour:
   m_ObjectHideFlags: 0

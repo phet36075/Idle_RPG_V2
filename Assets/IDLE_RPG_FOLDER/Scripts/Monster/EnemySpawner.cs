@@ -139,20 +139,29 @@ public class EnemySpawner : MonoBehaviour
 
             if (currentStage % 5 == 0)
             {
-                enemy = Instantiate(enemyPrefab[1], spawnPos, Quaternion.identity);
+                enemy = Instantiate(enemyPrefab[4], spawnPos, Quaternion.identity);
                 maxEnemies = 1;
             }
             else 
-            if ((currentStage - 4) % 5 == 0)
+            if ((currentStage - 4) % 5 == 0) // ด่าน 4,9 , 14
             {
-                enemy = Instantiate(enemyPrefab[0], spawnPos, Quaternion.identity);
+                enemy = Instantiate(enemyPrefab[3], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
               
             }
-            else
-
+            else if (currentStage == 2)
             {
-                enemy = Instantiate(enemyPrefab[0], spawnPos, Quaternion.identity);
+                enemy = Instantiate(enemyPrefab[1], spawnPos, Quaternion.identity);
+                maxEnemies = 5;
+            }
+            else if (currentStage == 3)
+            {
+                enemy = Instantiate(enemyPrefab[2], spawnPos, Quaternion.identity);
+                maxEnemies = 5;
+            }
+            else
+            {
+                enemy = Instantiate(enemyPrefab[5], spawnPos, Quaternion.identity);
                 maxEnemies = 5;
             }
                
