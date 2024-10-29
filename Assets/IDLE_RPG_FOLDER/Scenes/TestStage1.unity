@@ -48583,6 +48583,7 @@ MonoBehaviour:
   minZoom: 1
   maxZoom: 100
   lookAtCameraDistance: 30
+  rotationSpeedMultiplier: 5
 --- !u!114 &1729740482
 MonoBehaviour:
   m_ObjectHideFlags: 0
